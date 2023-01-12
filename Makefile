@@ -4,7 +4,7 @@ LIBFT			=	includes/libft/libft.a
 
 PRINTF			=	includes/ft_printf/libftprintf.a
 
-SRCS			=	main.c
+SRCS			=	main.c parsing.c movement.c utils.c
 
 # Colors
 DEF_COLOR = \033[0;39m
@@ -15,7 +15,7 @@ OBJS			=	${SRCS:.c=.o}
 
 HEAD			=	-I includes
 
-CFLAGS			=	-Wall -Werror -Wextra -g
+CFLAGS			=	-Wall -Werror -Wextra -g3
 
 all				:	${NAME}
 

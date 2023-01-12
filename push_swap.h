@@ -6,7 +6,7 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 21:00:29 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/01/07 23:38:40 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/01/12 03:00:07 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,14 @@
 # define GREEN "\033[0;32m"
 # define RED "\033[0;31m"
 # define END "\033[0m"
+# define INT_MIN -2147483648
+# define INT_MAX 2147483647
 
 typedef struct s_stack
 {
 	int				number;
+	int				counter;
+	int				knock;
 	struct s_stack	*next;
 }	t_stack;
 
@@ -31,5 +35,17 @@ typedef struct s_data
 	t_stack	*stack_a;
 	t_stack	*stack_b;
 }	t_data;
+
+void	ft_checkbefore(t_data *stack);
+int		ft_already_sort(t_stack *lst);
+int		ft_checkdouble(t_stack *lst);
+int		ft_atoi2(const char *nptr);
+void	ft_error(void);
+void	display_lst(t_stack *lst, char c);
+int		ft_checkdouble(t_stack *lst);
+int		ft_parsing(char *str);
+t_stack	*ft_addstack(int nb);
+int		ft_already_sort(t_stack *lst);
+void	ft_sa_sb(t_data *stack, char c);
 
 #endif

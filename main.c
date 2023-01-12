@@ -6,60 +6,18 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:56:26 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/01/07 23:44:07 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/01/12 03:26:28 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int	ft_parsing(char *str)
-{
-	while (*str)
-	{
-		if (!ft_isdigit(*str))
-			return (0);
-		str++;
-	}
-	return (1);
-}
-
-t_stack	*ft_addstack(int nb)
-{
-	t_stack	*ptr;
-
-	ptr = malloc(sizeof(t_list));
-	if (!ptr)
-		return (NULL);
-	ptr->number = nb;
-	ptr->next = NULL;
-	return (ptr);
-}
-
-void	display_lst(t_stack *lst)
-{
-	t_stack	*temp;
-	int		i;
-
-	i = 0;
-	temp = lst;
-	ft_printf("\n   ****** DISPLAY CONTENT LINKED LIST *****\n\n");
-	while (temp != NULL)
-	{
-		++i;
-		printf("\t Contenu du noeud [%d] : %d\n", i, temp->number);
-		temp = temp->next;
-	}
-	ft_printf("\n   ****************************************\n");
-}
 
 t_stack	*ft_lstlaste(t_stack *lst)
 {
 	if (!lst)
 		return (0);
 	while (lst->next != NULL)
-	{
 		lst = lst->next;
-	}
 	return (lst);
 }
 
@@ -76,52 +34,64 @@ void	ft_lstaddback(t_stack **lst, t_stack *new)
 		*lst = new;
 }
 
-void ft_error(void)
+void	ft_parse_sort(t_data *stack)
 {
-	ft_printf("Error\n");
-	exit(1);
+	if (stack->stack_a->counter == 2)
+		ft_sa_sb(stack, 'a');
+	if (stack->stack_a->counter == 4)
+		printf("4 Numbers !\n");
+	if (stack->stack_a->counter == 6)
+		printf("6 Numbers !\n");
 }
 
-int	ft_checkdouble(t_stack *lst)
+void	benchtest(int onoff, t_data *stack)
 {
-	t_stack	*begin;
-	t_stack	*cmp;
-
-	begin = lst;
-	while (begin)
+	if (onoff == 1)
 	{
-		cmp = begin->next;
-		while (cmp)
-		{
-			if (begin->number == cmp->number)
-				ft_error();
-			cmp = cmp->next;
-		}
-		begin = begin->next;
+		ft_printf("\n\t%s     ********************%s\n", GREEN, END);
+		ft_printf("\t     %s*%s BENCHTEST [ %sON%s ] %s*%s",
+			GREEN, END, GREEN, END, GREEN, END);
+		ft_printf("\n\t%s     ********************%s\n", GREEN, END);
+		ft_printf("\n\t  Number count STACK A = [%d]\n", stack->stack_a->counter);
+		ft_printf("\n\t  Number count STACK B = [%d]\n", stack->stack_b->counter);
+		ft_printf("\n   ******************************************\n");
+		display_lst(stack->stack_a, 'A');
+		display_lst(stack->stack_b, 'B');
 	}
-	return (1);
+	if (onoff == 0)
+	{
+		ft_printf("\n\t%s     *********************%s\n", RED, END);
+		ft_printf("\t     %s*%s BENCHTEST [ %sOFF%s ] %s*%s",
+			RED, END, RED, END, RED, END);
+		ft_printf("\n\t%s     *********************\n\n", RED, END);
+	}
 }
 
 int	main(int argc, char *argv[])
 {
 	int				i;
-	static t_stack	*tab = NULL;
+	static t_data	*stack = NULL;
 
-	if (argc == 1)
-		return (ft_printf("./push_swap %s< %sNumbers%s >%s\n",
+	if (argc < 3)
+		return (ft_printf("./push_swap %s< %sminimum 2 Numbers %s>%s\n",
 				RED, END, RED, END));
-	tab = malloc(sizeof(t_stack));
-	if (!tab)
+	stack = malloc(sizeof(t_data));
+	stack->stack_a = malloc(sizeof(t_stack));
+	stack->stack_b = malloc(sizeof(t_stack));
+	if (!stack || !stack->stack_a || !stack->stack_b)
 		return (0);
-	tab->number = ft_atoi(argv[1]);
+	stack->stack_a->number = ft_atoi2(argv[1]);
+	stack->stack_a->counter++;
 	i = 2;
 	while (argv[i])
 	{
 		if (!ft_parsing(argv[i]) || !ft_parsing(argv[1]))
 			ft_error();
-		ft_lstaddback(&tab, ft_addstack(ft_atoi(argv[i])));
+		ft_lstaddback(&stack->stack_a, ft_addstack(ft_atoi2(argv[i])));
+		stack->stack_a->counter++;
 		i++;
 	}
-	ft_checkdouble(tab);
-	display_lst(tab);
+	ft_checkbefore(stack);
+	ft_parse_sort(stack);
+	benchtest(1, stack);
 }
