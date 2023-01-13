@@ -6,7 +6,7 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:56:26 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/01/12 03:26:28 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/01/13 03:06:51 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,20 +70,20 @@ void	benchtest(int onoff, t_data *stack)
 int	main(int argc, char *argv[])
 {
 	int				i;
-	static t_data	*stack = NULL;
+	t_data			*stack;
 
 	if (argc < 3)
 		return (ft_printf("./push_swap %s< %sminimum 2 Numbers %s>%s\n",
 				RED, END, RED, END));
-	stack = malloc(sizeof(t_data));
-	stack->stack_a = malloc(sizeof(t_stack));
-	stack->stack_b = malloc(sizeof(t_stack));
+	stack = ft_calloc(1, sizeof(t_data));
+	stack->stack_a = ft_calloc(1, sizeof(t_stack));
+	stack->stack_b = ft_calloc(1, sizeof(t_stack));
 	if (!stack || !stack->stack_a || !stack->stack_b)
 		return (0);
 	stack->stack_a->number = ft_atoi2(argv[1]);
 	stack->stack_a->counter++;
 	i = 2;
-	while (argv[i])
+	while (i < argc)
 	{
 		if (!ft_parsing(argv[i]) || !ft_parsing(argv[1]))
 			ft_error();

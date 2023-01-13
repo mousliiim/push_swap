@@ -6,7 +6,7 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 02:38:15 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/01/12 03:18:27 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/01/13 03:07:07 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,17 @@ t_stack	*ft_addstack(int nb)
 {
 	t_stack	*ptr;
 
-	ptr = malloc(sizeof(t_list));
+	ptr = ft_calloc(1, sizeof(t_stack));
 	if (!ptr)
 		return (NULL);
 	ptr->number = nb;
 	ptr->next = NULL;
 	return (ptr);
+}
+
+t_stack	*ft_find_beforelast(t_stack *tmp)
+{
+	while (tmp->next->next != NULL)
+			tmp = tmp->next;
+	return (tmp);
 }

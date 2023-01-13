@@ -6,7 +6,7 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 21:00:29 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/01/12 03:00:07 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/01/13 03:07:58 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ typedef struct s_stack
 {
 	int				number;
 	int				counter;
-	int				knock;
 	struct s_stack	*next;
 }	t_stack;
 
@@ -47,5 +46,8 @@ int		ft_parsing(char *str);
 t_stack	*ft_addstack(int nb);
 int		ft_already_sort(t_stack *lst);
 void	ft_sa_sb(t_data *stack, char c);
-
+void	ft_ra_rb(t_data *stack, char c);
+t_stack	*ft_lstlaste(t_stack *lst);
+void	ft_rra_rrb(t_data *stack, char c);
+t_stack	*ft_find_beforelast(t_stack *tmp);
 #endif
