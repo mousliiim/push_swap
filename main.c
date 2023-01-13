@@ -6,7 +6,7 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:56:26 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/01/13 03:06:51 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/01/13 21:33:49 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,23 +48,27 @@ void	benchtest(int onoff, t_data *stack)
 {
 	if (onoff == 1)
 	{
-		ft_printf("\n\t%s     ********************%s\n", GREEN, END);
-		ft_printf("\t     %s*%s BENCHTEST [ %sON%s ] %s*%s",
+		ft_printf("\n\t%s   ********************%s\n", GREEN, END);
+		ft_printf("\t   %s*%s BENCHTEST [ %sON%s ] %s*%s",
 			GREEN, END, GREEN, END, GREEN, END);
-		ft_printf("\n\t%s     ********************%s\n", GREEN, END);
-		ft_printf("\n\t  Number count STACK A = [%d]\n", stack->stack_a->counter);
-		ft_printf("\n\t  Number count STACK B = [%d]\n", stack->stack_b->counter);
+		ft_printf("\n\t%s   ********************%s\n", GREEN, END);
+		if (stack->stack_a)
+			ft_printf("\n\t  Nb count STACK A = [%d]\n", stack->stack_a->counter);
+		if (stack->stack_b)
+			ft_printf("\n\t  Nb count STACK B = [%d]\n", stack->stack_b->counter);
 		ft_printf("\n   ******************************************\n");
-		display_lst(stack->stack_a, 'A');
-		display_lst(stack->stack_b, 'B');
+		if (stack->stack_a)
+			display_lst(stack->stack_a, 'A');
+		else
+			ft_printf("\t\t%sSTACK A IS EMPTY !%s\n", RED, END);
+		if (stack->stack_b)
+			display_lst(stack->stack_b, 'B');
+		else
+			ft_printf("\t     %sSTACK B IS EMPTY !%s\n", RED, END);
 	}
 	if (onoff == 0)
-	{
-		ft_printf("\n\t%s     *********************%s\n", RED, END);
 		ft_printf("\t     %s*%s BENCHTEST [ %sOFF%s ] %s*%s",
 			RED, END, RED, END, RED, END);
-		ft_printf("\n\t%s     *********************\n\n", RED, END);
-	}
 }
 
 int	main(int argc, char *argv[])
@@ -76,20 +80,15 @@ int	main(int argc, char *argv[])
 		return (ft_printf("./push_swap %s< %sminimum 2 Numbers %s>%s\n",
 				RED, END, RED, END));
 	stack = ft_calloc(1, sizeof(t_data));
-	stack->stack_a = ft_calloc(1, sizeof(t_stack));
-	stack->stack_b = ft_calloc(1, sizeof(t_stack));
-	if (!stack || !stack->stack_a || !stack->stack_b)
+	if (!stack)
 		return (0);
-	stack->stack_a->number = ft_atoi2(argv[1]);
-	stack->stack_a->counter++;
-	i = 2;
-	while (i < argc)
+	i = 0;
+	while (++i < argc)
 	{
-		if (!ft_parsing(argv[i]) || !ft_parsing(argv[1]))
+		if (!ft_parsing(argv[i]))
 			ft_error();
 		ft_lstaddback(&stack->stack_a, ft_addstack(ft_atoi2(argv[i])));
 		stack->stack_a->counter++;
-		i++;
 	}
 	ft_checkbefore(stack);
 	ft_parse_sort(stack);

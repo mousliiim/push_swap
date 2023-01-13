@@ -6,7 +6,7 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 02:42:14 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/01/13 03:07:44 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/01/13 21:31:38 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,47 +18,25 @@ void	ft_sa_sb(t_data *stack, char c)
 
 	if (stack)
 	{
-		if (c == 'a')
+		if (c == 'a' && stack->stack_a)
 		{
 			temp = stack->stack_a->number;
 			stack->stack_a->number = stack->stack_a->next->number;
 			stack->stack_a->next->number = temp;
 			ft_printf("sa\n");
 		}
-		if (c == 'b')
+		if (c == 'b' && stack->stack_b)
 		{
 			temp = stack->stack_b->number;
 			stack->stack_b->number = stack->stack_b->next->number;
 			stack->stack_b->next->number = temp;
 			ft_printf("sb\n");
 		}
-		if (c == '2')
+		if (c == '2' && (stack->stack_a && stack->stack_b))
 		{
 			ft_sa_sb(stack, 'a');
 			ft_sa_sb(stack, 'b');
 		}
-	}
-}
-
-static void	ft_rotate_rarb(t_data *stack, t_stack *last, char c, int temp)
-{
-	if (c == 'a')
-	{
-		if (!stack)
-			exit(0);
-		temp = stack->stack_a->number;
-		last = ft_lstlaste(stack->stack_a);
-		stack->stack_a = stack->stack_a->next;
-		last->next = ft_addstack(temp);
-	}
-	if (c == 'b')
-	{
-		if (!stack)
-			exit(0);
-		temp = stack->stack_b->number;
-		last = ft_lstlaste(stack->stack_b);
-		stack->stack_b = stack->stack_b->next;
-		last->next = ft_addstack(temp);
 	}
 }
 
@@ -69,50 +47,21 @@ void	ft_ra_rb(t_data *stack, char c)
 
 	if (stack)
 	{
-		if (c == 'a')
+		if (c == 'a' && stack->stack_a)
 		{
-			ft_rotate_rarb(stack, last, 'a', temp);
+			ft_rotate_ra_rb(stack, last, 'a', temp);
 			ft_printf("ra\n");
 		}
-		if (c == 'b')
+		if (c == 'b' && stack->stack_b)
 		{
-			ft_rotate_rarb(stack, last, 'b', temp);
+			ft_rotate_ra_rb(stack, last, 'b', temp);
 			ft_printf("rb\n");
 		}
-		if (c == '2')
+		if (c == '2' && (stack->stack_a && stack->stack_b))
 		{
 			ft_ra_rb(stack, 'a');
 			ft_ra_rb(stack, 'b');
 		}
-	}
-}
-
-void	rotate_rrb_rra(t_data *stack, t_stack *last, t_stack *head, char c)
-{
-	static t_stack	*beforelast = NULL;
-	static t_stack	*tmp = NULL;
-
-	if (c == 'a')
-	{
-		head = stack->stack_a;
-		last = ft_lstlaste(stack->stack_a);
-		tmp = stack->stack_a;
-		tmp = ft_find_beforelast(tmp);
-		stack->stack_a = last;
-		stack->stack_a->next = head;
-		beforelast = tmp;
-		beforelast->next = NULL;
-	}
-	if (c == 'b')
-	{
-		head = stack->stack_b;
-		last = ft_lstlaste(stack->stack_b);
-		tmp = stack->stack_b;
-		tmp = ft_find_beforelast(tmp);
-		stack->stack_b = last;
-		stack->stack_b->next = head;
-		beforelast = tmp;
-		beforelast->next = NULL;
 	}
 }
 
@@ -123,22 +72,48 @@ void	ft_rra_rrb(t_data *stack, char c)
 
 	if (stack)
 	{
-		if (c == 'a')
+		if (c == 'a' && stack->stack_a)
 		{
-			rotate_rrb_rra(stack, last, head, 'a');
+			ft_rotate_rrb_rra(stack, last, head, 'a');
 			ft_printf("rra\n");
 		}
-		if (c == 'b')
+		if (c == 'b' && stack->stack_b)
 		{
-			rotate_rrb_rra(stack, last, head, 'b');
+			ft_rotate_rrb_rra(stack, last, head, 'b');
 			ft_printf("rrb\n");
 		}
-		if (c == '2')
+		if (c == '2' && (stack->stack_a && stack->stack_b))
 		{
 			ft_rra_rrb(stack, 'a');
 			ft_rra_rrb(stack, 'b');
 		}
 	}
-	else
-		exit(1);
+}
+
+void	ft_push_stack(t_data *stack, char c)
+{
+	static t_stack	*tmp = NULL;
+	static t_stack	*prev = NULL;
+
+	if (stack)
+	{
+		if (c == 'a' && stack->stack_b)
+		{
+			tmp = stack->stack_b;
+			stack->stack_b = stack->stack_b->next;
+			prev = stack->stack_a;
+			stack->stack_a = tmp;
+			stack->stack_a->next = prev;
+			ft_printf("pa\n");
+		}
+		if (c == 'b' && stack->stack_a)
+		{
+			tmp = stack->stack_a;
+			stack->stack_a = stack->stack_a->next;
+			prev = stack->stack_b;
+			stack->stack_b = tmp;
+			stack->stack_b->next = prev;
+			ft_printf("pb\n");
+		}
+	}
 }

@@ -4,7 +4,7 @@ LIBFT			=	includes/libft/libft.a
 
 PRINTF			=	includes/ft_printf/libftprintf.a
 
-SRCS			=	main.c parsing.c movement.c utils.c
+SRCS			=	main.c parsing.c movement.c movement_utils.c utils.c
 
 # Colors
 DEF_COLOR = \033[0;39m
