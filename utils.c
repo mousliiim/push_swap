@@ -6,7 +6,7 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 02:38:15 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/01/13 21:31:55 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/01/14 02:56:38 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,29 @@ t_stack	*ft_addstack(int nb)
 	ptr->number = nb;
 	ptr->next = NULL;
 	return (ptr);
+}
+
+t_stack	*find_small_nb(t_data *stack)
+{
+	static t_stack	*curr = NULL;
+	static t_stack	*little = NULL;
+	int				small;
+
+	curr = stack->stack_a;
+	little = curr;
+	small = curr -> number;
+	while (curr != NULL)
+	{
+		if (curr->next != NULL)
+		{
+
+			if (small > curr->next->number)
+			{
+				small = curr -> next -> number;
+				little = curr -> next;
+			}
+		}
+		curr = curr->next;
+	}
+	return (little);
 }

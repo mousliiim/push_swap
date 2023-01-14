@@ -6,7 +6,7 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 21:00:29 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/01/13 21:32:25 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/01/14 02:56:49 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,5 @@ t_stack	*ft_find_beforelast(t_stack *tmp);
 void	ft_push_stack(t_data *stack, char c);
 void	ft_rotate_ra_rb(t_data *stack, t_stack *last, char c, int temp);
 void	ft_rotate_rrb_rra(t_data *stack, t_stack *last, t_stack *head, char c);
+t_stack	*find_small_nb(t_data *stack);
 #endif
