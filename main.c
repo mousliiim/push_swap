@@ -6,126 +6,64 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:56:26 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/01/14 02:57:58 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/01/15 03:02:02 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_stack	*ft_lstlaste(t_stack *lst)
+static void	ft_parse_sort(t_data *stack)
 {
-	if (!lst)
-		return (0);
-	while (lst->next != NULL)
-		lst = lst->next;
-	return (lst);
-}
-
-void	ft_lstaddback(t_stack **lst, t_stack *new)
-{
-	t_stack	*last;
-
-	if (*lst)
-	{
-		last = ft_lstlaste(*lst);
-		last->next = new;
-	}
-	else
-		*lst = new;
-}
-
-void	ft_three_nb_algo(t_data *stack)
-{
-	static t_stack	*small = NULL;
-	static t_stack	*curr = NULL;
-	int i = 1;
-
-	small = find_small_nb(stack);
-	curr = stack->stack_a;
-	while (curr != NULL)
-	{
-		if (i == 2 && curr->number == small->number
-			&& stack->stack_a->number > stack->stack_a->next->next->number)
-			ft_ra_rb(stack, 'a');
-		if (i == 1 && curr->number == small->number)
-		{
-			ft_sa_sb(stack, 'a');
-			ft_ra_rb(stack, 'a');
-		}
-		if (i == 3 && curr->number == small->number
-			&& stack->stack_a->number < stack->stack_a->next->number)
-			ft_rra_rrb(stack, 'a');
-		curr = curr->next;
-		i++;
-	}
-	if (stack->stack_a->number > stack->stack_a->next->number
-		&& stack->stack_a->next->next->number == small->number)
-	{
+	if (stack->counter_a == 2)
 		ft_sa_sb(stack, 'a');
-		ft_rra_rrb(stack, 'a');
-	}
-	if (stack->stack_a->number < stack->stack_a->next->next->number
-		&& stack->stack_a->next->number == small->number)
-		ft_sa_sb(stack, 'a');
-}
-
-void	ft_parse_sort(t_data *stack)
-{
-	if (stack->stack_a->counter == 2)
-		ft_sa_sb(stack, 'a');
-	if (stack->stack_a->counter == 3)
+	if (stack->counter_a == 3)
 		ft_three_nb_algo(stack);
-	if (stack->stack_a->counter == 6)
-		printf("6 Numbers !\n");
+	if (stack->counter_a > 3)
+		ft_big_nb_algo(stack);
 }
 
-/* A METTRE AUTRE PART HAUT */
-
-void	benchtest(int onoff, t_data *stack)
+char	**ft_cut_arg(char *str)
 {
-	if (onoff == 1)
-	{
-		ft_printf("\n\t%s   ********************%s\n", GREEN, END);
-		ft_printf("\t   %s*%s BENCHTEST [ %sON%s ] %s*%s",
-			GREEN, END, GREEN, END, GREEN, END);
-		ft_printf("\n\t%s   ********************%s\n", GREEN, END);
-		if (stack->stack_a)
-			ft_printf("\n\t  Nb count STACK A = [%d]\n", stack->stack_a->counter);
-		if (stack->stack_b)
-			ft_printf("\n\t  Nb count STACK B = [%d]\n", stack->stack_b->counter);
-		ft_printf("\n   ******************************************\n");
-		if (stack->stack_a)
-			display_lst(stack->stack_a, 'A');
-		else
-			ft_printf("\t\t%sSTACK A IS EMPTY !%s\n", RED, END);
-		if (stack->stack_b)
-			display_lst(stack->stack_b, 'B');
-		else
-			ft_printf("\t     %sSTACK B IS EMPTY !%s\n", RED, END);
-	}
-	if (onoff == 0)
-		ft_printf("\t     %s*%s BENCHTEST [ %sOFF%s ] %s*%s",
-			RED, END, RED, END, RED, END);
+	int		nbword;
+	char	**nb;
+
+	nbword = ft_countword(str);
+	if (nbword < 1)
+		ft_error();
+	nb = ft_split(str, ' ');
+	return (nb);
 }
 
 int	main(int argc, char *argv[])
 {
 	int				i;
 	t_data			*stack;
+	char 			**temp;
+	int				j;
 
-	if (argc < 3)
+	if (argc < 2)
 		return (ft_printf("./push_swap %s< %sminimum 2 Numbers %s>%s\n",
 				RED, END, RED, END));
+	if (argc == 2)
+		ft_cut_arg(argv[1]);
 	stack = ft_calloc(1, sizeof(t_data));
 	if (!stack)
 		return (0);
 	i = 0;
+	j = -1;
 	while (++i < argc)
 	{
-		if (!ft_parsing(argv[i]))
+		temp = ft_split(argv[i], ' ');
+		j = -1;
+		if (!temp || !temp[0])
 			ft_error();
-		ft_lstaddback(&stack->stack_a, ft_addstack(ft_atoi2(argv[i])));
-		stack->stack_a->counter++;
+		while (temp[++j])
+		{
+			if (!ft_parsing(temp[j]))
+				ft_error();
+			ft_lstaddback(&stack->stack_a, ft_addstack(ft_atoi2(temp[j])));
+			stack->counter_a++;
+		}
 	}
 	ft_checkbefore(stack);
 	ft_parse_sort(stack);

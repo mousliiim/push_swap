@@ -6,7 +6,7 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 01:59:09 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/01/13 00:56:40 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/01/15 03:01:59 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ int	ft_already_sort(t_stack *lst)
 
 int	ft_parsing(char *str)
 {
+	if (!*str)
+		return (0);
 	while (*str)
 	{
 		if (!ft_isdigit(*str))
@@ -77,4 +79,22 @@ void	ft_checkbefore(t_data *stack)
 	ft_checkdouble(stack->stack_a);
 	if (!ft_already_sort(stack->stack_a))
 		exit(0);
+}
+
+int	ft_countword(char *str)
+{
+	int	word;
+
+	word = 0;
+	while (*str == ' ' || *str == '\t' || *str == '\n')
+		str++;
+	while (*str)
+	{
+		++word;
+		while (*str == ' ' || *str == '\t' || *str == '\n')
+			str++;
+		while (*str != '\0' && *str != '\t' && *str != ' ' && *str != '\n')
+			str++;
+	}
+	return (word);
 }

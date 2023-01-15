@@ -6,7 +6,7 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 21:00:29 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/01/14 02:56:49 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/01/15 02:58:31 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 typedef struct s_stack
 {
 	int				number;
-	int				counter;
 	struct s_stack	*next;
 }	t_stack;
 
@@ -33,6 +32,8 @@ typedef struct s_data
 {
 	t_stack	*stack_a;
 	t_stack	*stack_b;
+	int		counter_a;
+	int		counter_b;
 }	t_data;
 
 void	ft_checkbefore(t_data *stack);
@@ -54,4 +55,11 @@ void	ft_push_stack(t_data *stack, char c);
 void	ft_rotate_ra_rb(t_data *stack, t_stack *last, char c, int temp);
 void	ft_rotate_rrb_rra(t_data *stack, t_stack *last, t_stack *head, char c);
 t_stack	*find_small_nb(t_data *stack);
+int		ft_countword(char *str);
+void	ft_three_nb_algo(t_data *stack);
+void	ft_big_nb_algo(t_data *stack);
+t_stack	*ft_lstlaste(t_stack *lst);
+void	ft_lstaddback(t_stack **lst, t_stack *new);
+/* BENCHTEST */
+void	benchtest(int onoff, t_data *stack);
 #endif

@@ -6,7 +6,7 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 02:42:14 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/01/13 21:31:38 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/01/15 01:34:46 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,9 @@ void	ft_push_stack(t_data *stack, char c)
 			prev = stack->stack_a;
 			stack->stack_a = tmp;
 			stack->stack_a->next = prev;
+			if (stack->counter_b)
+				stack->counter_b--;
+			stack->counter_a++;
 			ft_printf("pa\n");
 		}
 		if (c == 'b' && stack->stack_a)
@@ -113,7 +116,23 @@ void	ft_push_stack(t_data *stack, char c)
 			prev = stack->stack_b;
 			stack->stack_b = tmp;
 			stack->stack_b->next = prev;
+			if (stack->counter_a)
+				stack->counter_a--;
+			stack->counter_b++;
 			ft_printf("pb\n");
 		}
 	}
+}
+
+void	ft_three_nb_algo_movement(t_data *stack, t_stack *small)
+{
+	if (stack->stack_a->number > stack->stack_a->next->number
+		&& stack->stack_a->next->next->number == small->number)
+	{
+		ft_sa_sb(stack, 'a');
+		ft_rra_rrb(stack, 'a');
+	}
+	if (stack->stack_a->number < stack->stack_a->next->next->number
+		&& stack->stack_a->next->number == small->number)
+		ft_sa_sb(stack, 'a');
 }

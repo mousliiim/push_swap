@@ -6,7 +6,7 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 02:38:15 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/01/14 02:56:38 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/01/15 02:43:26 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_atoi2(const char *nptr)
 			sign = -1;
 		nptr++;
 	}
-	if (*nptr == '-' || *nptr == '+')
+	if (*nptr == '-' || *nptr == '+' || *nptr == ' ' || *nptr == '\0')
 		ft_error();
 	while (*nptr >= '0' && *nptr <= '9')
 	{
@@ -98,3 +98,32 @@ t_stack	*find_small_nb(t_data *stack)
 	}
 	return (little);
 }
+
+/*\*/
+void	benchtest(int onoff, t_data *stack)
+{
+	if (onoff == 1)
+	{
+		ft_printf("\n\t%s   ********************%s\n", GREEN, END);
+		ft_printf("\t   %s*%s BENCHTEST [ %sON%s ] %s*%s",
+			GREEN, END, GREEN, END, GREEN, END);
+		ft_printf("\n\t%s   ********************%s\n", GREEN, END);
+		if (stack->stack_a)
+			ft_printf("\n\t  Nb count STACK A = [%d]\n", stack->counter_a);
+		if (stack->stack_b)
+			ft_printf("\n\t  Nb count STACK B = [%d]\n", stack->counter_b);
+		ft_printf("\n   ******************************************\n");
+		if (stack->stack_a)
+			display_lst(stack->stack_a, 'A');
+		else
+			ft_printf("\t\t%sSTACK A IS EMPTY !%s\n", RED, END);
+		if (stack->stack_b)
+			display_lst(stack->stack_b, 'B');
+		else
+			ft_printf("\t     %sSTACK B IS EMPTY !%s\n", RED, END);
+	}
+	if (onoff == 0)
+		ft_printf("\t     %s*%s BENCHTEST [ %sOFF%s ] %s*%s",
+			RED, END, RED, END, RED, END);
+}
+/**/
