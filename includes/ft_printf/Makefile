@@ -2,7 +2,7 @@ SRCS		= ft_printf.c ft_printf_inc.c\
 
 OBJS		= ${SRCS:.c=.o}
 NAME		= libftprintf.a
-CC			= gcc -Wall -Wextra -Werror
+CC			= @gcc -Wall -Wextra -Werror
 
 %.o: %.c ft_printf.h
 			${CC} -I. -c $< -o ${<:.c=.o}
@@ -10,7 +10,7 @@ CC			= gcc -Wall -Wextra -Werror
 all:		${NAME}
 
 $(NAME):	${OBJS} ft_printf.h
-			ar rcs ${NAME} ${OBJS}
+			@ar rcs ${NAME} ${OBJS}
 			
 clean:
 			rm -f ${OBJS}

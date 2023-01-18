@@ -6,7 +6,7 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 21:00:29 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/01/15 02:58:31 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/01/18 04:44:55 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_data
 	t_stack	*stack_b;
 	int		counter_a;
 	int		counter_b;
+	int		lis_count;
 }	t_data;
 
 void	ft_checkbefore(t_data *stack);

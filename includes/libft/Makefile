@@ -16,15 +16,15 @@ OBJS_BONUS	= ${BONUS:.c=.o}
 HEADERS	= ./
  
 .c.o	:
-		cc -Wall -Wextra -Werror -I ${HEADERS} -c $< -o ${<:.c=.o}
+		@cc -Wall -Wextra -Werror -I ${HEADERS} -c $< -o ${<:.c=.o}
  
 all : ${NAME}
  
 ${NAME} : ${OBJS}
-		ar rcs ${NAME} ${OBJS}
+		@ar rcs ${NAME} ${OBJS}
  
 bonus	: $(OBJS) $(OBJS_BONUS)
-		ar rcs $(NAME) $(OBJS) $(OBJS_BONUS)
+		@ar rcs $(NAME) $(OBJS) $(OBJS_BONUS)
  
 clean :
 		rm -f ${OBJS} ${OBJS_BONUS} $(OBJS_GNL) $(OBJS_PRINTF)
@@ -33,12 +33,6 @@ fclean : clean
 		rm -f ${NAME}
  
 re : fclean all
- 
-.PHONY : all bonus clean fclean re
-
-so:
-	$(CC) -nostartfiles -fPIC $(CFLAGS) $(SRCS)
-	gcc -nostartfiles -shared -o libft.so $(OBJS) $(OBJS_BONUS)
 
 myclean:
 	$(info ************  Je clean pour toi 😉  *************)
@@ -51,4 +45,6 @@ myclean:
 	@rm libft.a
 	$(info Suprimme le fichier libft.a ✅)
 	$(info ************  Et voila c'est fait  *************)
+ 
+.PHONY : all bonus clean fclean re myclean
 

@@ -6,7 +6,7 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 02:38:15 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/01/15 02:43:26 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/01/16 01:17:25 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,14 @@ int	ft_atoi2(const char *nptr)
 			ft_error();
 		nptr++;
 	}
+	if (ft_isdigit(*nptr))
+		ft_error();
 	return (result * sign);
 }
 
 void	ft_error(void)
 {
-	ft_printf("Error\n");
+	ft_putstr_fd("Error\n", 2);
 	exit(1);
 }
 

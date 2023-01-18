@@ -19,23 +19,25 @@ CFLAGS			=	-Wall -Werror -Wextra -g3
 
 all				:	${NAME}
 
+.c.o	:
+		@cc  ${CFLAGS} ${HEAD} -c $< -o ${<:.c=.o}
+
 $(NAME) : $(OBJS)
 	@echo "\t\t\t${GREEN}========================${DEF_COLOR}"
 	@echo "\t\t\t${GREEN}=== MAKE ${PURPLE}MANDATORY ⌛${DEF_COLOR}${GREEN}===${DEF_COLOR}"
 	@echo "\t\t\t${GREEN}========================${DEF_COLOR}\n"
-	@sleep 1
 	@echo "\t\t\t${GREEN}========================${DEF_COLOR}"
 	@echo "\t\t\t${GREEN}===== MAKE ${PURPLE}LIBFT ⌛${DEF_COLOR}${GREEN}=====${DEF_COLOR}"
 	@echo "\t\t\t${GREEN}========================${DEF_COLOR}\n"
-	@make -C includes/libft
+	@make --no-print-directory -C includes/libft
 	@echo "\t\t\t${GREEN}=============================${DEF_COLOR}"
 	@echo "\t\t\t${GREEN}===== MAKE ${PURPLE}FT_PRINTF${DEF_COLOR} ⌛${GREEN} =====${DEF_COLOR}"
 	@echo "\t\t\t${GREEN}=============================${DEF_COLOR}\n"
-	@make -C includes/ft_printf
+	@make --no-print-directory -C includes/ft_printf
 	@echo "\t\t\t${GREEN}==============================${DEF_COLOR}"
 	@echo "\t\t\t${GREEN}==== ALL IS ${PURPLE}COMPILATED${DEF_COLOR} ✅${GREEN} ====${DEF_COLOR}"
 	@echo "\t\t\t${GREEN}==============================${DEF_COLOR}"
-	cc $(OBJS) ${LIBFT} ${PRINTF} -o $(NAME)
+	@cc $(OBJS) ${LIBFT} ${PRINTF} -o $(NAME)
 
 clean			:
 					make clean -C includes/libft/
