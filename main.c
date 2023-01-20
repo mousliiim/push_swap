@@ -6,11 +6,42 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:56:26 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/01/18 04:10:31 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/01/19 22:06:23 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	ft_pushmin(t_data *stack)
+{
+	static t_stack	*small = NULL;
+	static t_stack	*curr = NULL;
+	int				index;
+
+	curr = stack->stack_a;
+	small = find_small_nb(stack);
+	index = ft_find_nb_list_index(stack->stack_a, small->number);
+	while (stack->stack_a->number != small->number)
+	{
+		if (index <= stack->counter_a / 2)
+			ft_ra_rb(stack, 'a');
+		else
+			ft_rra_rrb(stack, 'a');
+	}
+	ft_push_stack(stack, 'b');
+}
+
+void	ft_five_nb_algo(t_data *stack)
+{
+	if (stack->counter_a == 5)
+		ft_pushmin(stack);
+	ft_pushmin(stack);
+	if (ft_already_sort(stack->stack_a))
+		ft_three_nb_algo(stack);
+	if (stack->counter_b == 2)
+		ft_push_stack(stack, 'a');
+	ft_push_stack(stack, 'a');
+}
 
 static void	ft_parse_sort(t_data *stack)
 {
@@ -18,7 +49,9 @@ static void	ft_parse_sort(t_data *stack)
 		ft_sa_sb(stack, 'a');
 	if (stack->counter_a == 3)
 		ft_three_nb_algo(stack);
-	if (stack->counter_a > 3)
+	if (stack->counter_a == 4 || stack->counter_a == 5)
+		ft_five_nb_algo(stack);
+	if (stack->counter_a > 5)
 		ft_big_nb_algo(stack);
 }
 
@@ -42,15 +75,13 @@ int	main(int argc, char *argv[])
 	int				j;
 
 	if (argc < 2)
-		return (ft_printf("./push_swap %s< %sminimum 2 Numbers %s>%s\n",
-				RED, END, RED, END));
+		return (0);
 	if (argc == 2)
 		ft_cut_arg(argv[1]);
 	stack = ft_calloc(1, sizeof(t_data));
 	if (!stack)
 		return (0);
 	i = 0;
-	j = -1;
 	while (++i < argc)
 	{
 		temp = ft_split(argv[i], ' ');
