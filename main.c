@@ -6,7 +6,7 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:56:26 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/01/19 22:06:23 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/01/20 06:02:31 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,5 @@ int	main(int argc, char *argv[])
 	}
 	ft_checkbefore(stack);
 	ft_parse_sort(stack);
-	benchtest(1, stack);
+	// benchtest(1, stack);
 }

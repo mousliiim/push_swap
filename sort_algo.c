@@ -6,7 +6,7 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 02:55:02 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/01/20 03:10:37 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/01/20 06:05:37 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ int	*ft_lis(int array_lis[], int array_lis2[], t_data *stack)
 		}
 		i++;
 	}
-	i = 0;
-	while (i < stack->counter_a)
-	{
-		ft_printf("\nArray for LIS [%d] = %d", i, array_lis[i]);
-		ft_printf(" | Array Check LIS [%d] = %d\n", i, array_lis2[i]);
-		i++;
-	}
+	// i = 0;
+	// while (i < stack->counter_a)
+	// {
+	// 	ft_printf("\nArray for LIS [%d] = %d", i, array_lis[i]);
+	// 	ft_printf(" | Array Check LIS [%d] = %d\n", i, array_lis2[i]);
+	// 	i++;
+	// }
 	i = 0;
 	count = 1;
 	while (i < stack->counter_a)
@@ -92,9 +92,23 @@ int	ft_nb_superior_bound(t_stack *node, t_data *stack)
 		if (curr_a->number > node->number)
 		{
 			supbound = curr_a->number;
-			return (supbound);
+			break;
 		}
 		curr_a = curr_a->next;
+	}
+	curr_a = stack->stack_a;
+	while (curr_a)
+	{
+		if (curr_a->number > node->number && curr_a->number < supbound)
+		{
+			supbound = curr_a->number;
+		}
+		curr_a = curr_a->next;
+	}
+	if (!supbound)
+	{
+		curr_a = find_small_nb(stack);
+		supbound = curr_a->number;
 	}
 	return (supbound);
 }
@@ -103,41 +117,32 @@ void	ft_optimal_moves_finder(t_data *stack)
 {
 	t_stack *head;
 	int		nbsup;
-	int		i = 0;
+	int		index;
 
 	 while (stack->counter_b)
 	 {
-		sleep(3);
 		head = stack->stack_b;
 		nbsup = ft_nb_superior_bound(head, stack);
-		if (!nbsup)
-		{
-			printf("1");
-			ft_ra_rb(stack, 'b'); 
-			head = stack->stack_b;
-			nbsup = ft_nb_superior_bound(head, stack);
-		}
+		index = ft_find_nb_list_index(stack->stack_a, nbsup);
 		while (head->number != nbsup)
 		{
 			head = stack->stack_a;
 			if (head->number == nbsup)
 				break;
-			i++;
-			ft_printf("2");
-			ft_ra_rb(stack, 'a');
+			if (index < (stack->counter_a / 2))
+				ft_ra_rb(stack, 'a');
+			else
+				ft_rra_rrb(stack, 'a');
 		}
 		if (head->number == nbsup)
 		{
-			i++;
 			ft_push_stack(stack, 'a');
 		}
 	}
 	while (ft_already_sort(stack->stack_a))
 	{
-		printf("3\n");
 		ft_ra_rb(stack, 'a');
 	}
-	printf("I = %d\n", i);
 }
 
 void	ft_big_nb_algo(t_data *stack)
@@ -179,14 +184,14 @@ void	ft_big_nb_algo(t_data *stack)
 		curr = stack->stack_a;
 		ft_ra_rb(stack, 'a');
 	}
-	i = 0;
-	printf("\n\tLIS = ");
-	while (i < stack->lis_count - 1)
-	{
-		printf("[%d] ", lis_tab[i]);
-		i++;
-	}
-	printf("\n");
+	// i = 0;
+	// printf("\n\tLIS = ");
+	// while (i < stack->lis_count - 1)
+	// {
+	// 	printf("[%d] ", lis_tab[i]);
+	// 	i++;
+	// }
+	// printf("\n");
 	ft_optimal_moves_finder(stack);
 }
 
