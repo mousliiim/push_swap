@@ -6,7 +6,7 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 02:55:02 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/01/20 06:05:37 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/01/21 06:06:40 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	ft_nb_superior_bound(t_stack *node, t_data *stack)
 		if (curr_a->number > node->number)
 		{
 			supbound = curr_a->number;
-			break;
+			break ;
 		}
 		curr_a = curr_a->next;
 	}
@@ -100,9 +100,7 @@ int	ft_nb_superior_bound(t_stack *node, t_data *stack)
 	while (curr_a)
 	{
 		if (curr_a->number > node->number && curr_a->number < supbound)
-		{
 			supbound = curr_a->number;
-		}
 		curr_a = curr_a->next;
 	}
 	if (!supbound)
@@ -113,35 +111,60 @@ int	ft_nb_superior_bound(t_stack *node, t_data *stack)
 	return (supbound);
 }
 
+// Implementer Structure Temporaire de t_data pour trouver le chiffre de la pile B qui fait le moin de coup
+// Comparer donc la structure dans temp avec les valeur pour c_ra, c_rb etc avec la structure t_data actuel parcouru
+// a l'iteration de la boucle dans la fonction ci dessous et donc a la fin que dans la structure temporaire sa contient
+// les meilleur coup a appliquer en premier puis le deuxieme puis le troisieme etc.
+
 void	ft_optimal_moves_finder(t_data *stack)
 {
-	t_stack *head;
-	int		nbsup;
-	int		index;
+	t_stack	*curr_b;
+	int	index_a;
+	int	index_b;
+	int	nbsup_b;
 
-	 while (stack->counter_b)
-	 {
-		head = stack->stack_b;
-		nbsup = ft_nb_superior_bound(head, stack);
-		index = ft_find_nb_list_index(stack->stack_a, nbsup);
-		while (head->number != nbsup)
-		{
-			head = stack->stack_a;
-			if (head->number == nbsup)
-				break;
-			if (index < (stack->counter_a / 2))
-				ft_ra_rb(stack, 'a');
-			else
-				ft_rra_rrb(stack, 'a');
-		}
-		if (head->number == nbsup)
-		{
-			ft_push_stack(stack, 'a');
-		}
-	}
-	while (ft_already_sort(stack->stack_a))
+	curr_b = stack->stack_b;
+	// nbsup_b = ft_nb_superior_bound(stack_b, stack);
+	// index_a = ft_find_nb_list_index(stack_a, nbsup_b);
+	// index_b = ft_find_nb_list_index(stack_b, stack_b->number);
+	while (curr_b != NULL)
 	{
-		ft_ra_rb(stack, 'a');
+		nbsup_b = ft_nb_superior_bound(curr_b, stack);
+		index_a = ft_find_nb_list_index(stack->stack_a, nbsup_b);
+		index_b = ft_find_nb_list_index(stack->stack_b, curr_b->number);
+		printf("\n\t|| Dad = [ %d ] for Node B (Child) [ %d ] ||\n", nbsup_b, curr_b->number);
+		printf("\t|| Index in List A for %d = [ %d ] ||\n",nbsup_b, index_a);
+		if (index_a <= (stack->counter_a / 2))
+		{
+			stack->c_ra = index_a;
+			printf("\t|| Need to do %d RA", stack->c_ra);
+		}
+		else
+		{
+			stack->c_rra = ft_rev_find_nb_list_index(stack->stack_a, nbsup_b);
+			printf("\t|| Need to do %d RRA", stack->c_rra);
+		}
+		if (index_b <= (stack->counter_b / 2))
+		{
+			stack->c_rb = index_b;
+			printf("|| Need to do %d RB ||\n", stack->c_rb);
+		}
+		else
+		{
+			stack->c_rrb = ft_rev_find_nb_list_index(stack->stack_b, curr_b->number);
+			printf("|| Need to do %d RRB ||\n", stack->c_rrb);
+		}
+		printf("\n\t[ First Call List Stack MOVCOUNT ]\n");
+		printf("\t\t[ Stack->c_ra = %d ]\n", stack->c_ra);
+		printf("\t\t[ Stack->c_rra = %d ]\n", stack->c_rra);
+		printf("\t\t[ Stack->c_rb = %d ]\n", stack->c_rb);
+		printf("\t\t[ Stack->c_rrb = %d ]\n", stack->c_rrb);
+		stack->c_ra = 0;
+		stack->c_rb = 0;
+		stack->c_rra = 0;
+		stack->c_rrb = 0;
+	curr_b = curr_b->next;
+	sleep(3);
 	}
 }
 
@@ -184,15 +207,32 @@ void	ft_big_nb_algo(t_data *stack)
 		curr = stack->stack_a;
 		ft_ra_rb(stack, 'a');
 	}
-	// i = 0;
-	// printf("\n\tLIS = ");
-	// while (i < stack->lis_count - 1)
-	// {
-	// 	printf("[%d] ", lis_tab[i]);
-	// 	i++;
-	// }
-	// printf("\n");
+	i = 0;
+	printf("\n\tLIS = ");
+	while (i < stack->lis_count - 1)
+	{
+		printf("[%d] ", lis_tab[i]);
+		i++;
+	}
+	printf("\n");
 	ft_optimal_moves_finder(stack);
+}
+
+int	ft_rev_find_nb_list_index(t_stack *stack, int nb)
+{
+	int		index;
+	t_stack	*curr;
+
+	curr = stack;
+	index = 0;
+	while (curr != NULL)
+	{
+		if (curr->number == nb)
+			index = 0;
+		index++;
+		curr = curr->next;
+	}
+	return (index);
 }
 
 int	ft_find_nb_list_index(t_stack *stack, int nb)
@@ -206,6 +246,25 @@ int	ft_find_nb_list_index(t_stack *stack, int nb)
 	{
 		if (curr->number == nb)
 			return (index);
+		index++;
+		curr = curr->next;
+	}
+	return (index);
+}
+
+int	ft_boost(t_stack *stack, int nb, char c)
+{
+	int		index;
+	t_stack	*curr;
+
+	curr = stack;
+	index = 0;
+	while (curr != NULL)
+	{
+		if (curr->number == nb && c == 'o')
+			break ;
+		if (curr->number == nb && c == 'r')
+			index = 0;
 		index++;
 		curr = curr->next;
 	}
