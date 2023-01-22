@@ -6,7 +6,7 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 01:59:09 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/01/15 23:49:12 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/01/22 20:45:50 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ int	ft_already_sort(t_stack *lst)
 		while (begin->next != NULL)
 		{
 			if (begin->number > begin->next->number)
-				return (1);
+				return (0);
 			begin = begin->next;
 		}
 		i++;
 	}
-	return (0);
+	return (1);
 }
 
 int	ft_parsing(char *str)
@@ -77,7 +77,7 @@ int	ft_checkdouble(t_stack *lst)
 void	ft_checkbefore(t_data *stack)
 {
 	ft_checkdouble(stack->stack_a);
-	if (!ft_already_sort(stack->stack_a))
+	if (ft_already_sort(stack->stack_a))
 		exit(0);
 }
 

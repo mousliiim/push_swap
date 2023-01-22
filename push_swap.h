@@ -6,7 +6,7 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 21:00:29 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/01/21 04:25:40 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/01/22 02:37:35 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,19 @@ typedef struct s_stack
 	struct s_stack	*next;
 }	t_stack;
 
+typedef struct s_cmove
+{
+	int		c_ra;
+	int		c_rb;
+	int		c_rra;
+	int		c_rrb;
+}	t_cmove;
+
 typedef struct s_data
 {
 	t_stack	*stack_a;
 	t_stack	*stack_b;
+	t_cmove	*move;
 	int		counter_a;
 	int		counter_b;
 	int		c_ra;
@@ -90,8 +99,7 @@ void	ft_lstaddback(t_stack **lst, t_stack *new);
 /** Algo de 5 et 4 si la pile est de 5 ou 4 chiffres **/
 void	ft_five_nb_algo(t_data *stack);
 /** Trouve l'index d'un nombre dans la pile en avant et en arriere **/
-int		ft_find_nb_list_index(t_stack *stack, int nb);
-int		ft_rev_find_nb_list_index(t_stack *stack, int nb);
+int		ft_find_nb_list_index(t_stack *stack, int nb, char c);
 /** Vérifie si un nombre est présent dans un tableau **/
 int		ft_verif(int nb, int *lis_tab, int sizelis);
 /* Affiche la liste et des informations visuel pour le projet */

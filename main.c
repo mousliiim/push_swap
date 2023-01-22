@@ -6,7 +6,7 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:56:26 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/01/20 23:22:14 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/01/22 20:45:37 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_pushmin(t_data *stack)
 
 	curr = stack->stack_a;
 	small = find_small_nb(stack);
-	index = ft_find_nb_list_index(stack->stack_a, small->number);
+	index = ft_find_nb_list_index(stack->stack_a, small->number, 'o');
 	while (stack->stack_a->number != small->number)
 	{
 		if (index <= stack->counter_a / 2)
@@ -36,7 +36,7 @@ void	ft_five_nb_algo(t_data *stack)
 	if (stack->counter_a == 5)
 		ft_pushmin(stack);
 	ft_pushmin(stack);
-	if (ft_already_sort(stack->stack_a))
+	if (!ft_already_sort(stack->stack_a))
 		ft_three_nb_algo(stack);
 	if (stack->counter_b == 2)
 		ft_push_stack(stack, 'a');
