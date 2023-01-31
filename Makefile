@@ -15,7 +15,7 @@ OBJS			=	${SRCS:.c=.o}
 
 HEAD			=	-I includes
 
-CFLAGS			=	-Wall -Werror -Wextra -g3
+CFLAGS			=	-Wall -Werror -Wextra -g3 -D BENCH=0
 
 all				:	${NAME}
 

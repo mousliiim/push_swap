@@ -6,7 +6,7 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 01:59:09 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/01/22 20:45:50 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/01/31 06:40:03 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	ft_checkdouble(t_stack *lst)
 		while (cmp)
 		{
 			if (begin->number == cmp->number)
-				ft_error();
+				ft_error(0);
 			cmp = cmp->next;
 		}
 		begin = begin->next;
@@ -74,27 +74,32 @@ int	ft_checkdouble(t_stack *lst)
 	return (1);
 }
 
-void	ft_checkbefore(t_data *stack)
+int	ft_verif(int nb, int *lis_tab, int sizelis)
 {
-	ft_checkdouble(stack->stack_a);
-	if (ft_already_sort(stack->stack_a))
-		exit(0);
+	int	i;
+
+	i = 0;
+	while (i < sizelis)
+	{
+		if (nb == lis_tab[i])
+			return (1);
+		i++;
+	}
+	return (0);
 }
 
-int	ft_countword(char *str)
+int	ft_findsmalltab(int *tab)
 {
-	int	word;
+	int	small;
+	int	i;
 
-	word = 0;
-	while (*str == ' ' || *str == '\t' || *str == '\n')
-		str++;
-	while (*str)
+	i = 0;
+	small = tab[0];
+	while (i < 4)
 	{
-		++word;
-		while (*str == ' ' || *str == '\t' || *str == '\n')
-			str++;
-		while (*str != '\0' && *str != '\t' && *str != ' ' && *str != '\n')
-			str++;
+		if (small > tab[i])
+			small = tab[i];
+		i++;
 	}
-	return (word);
+	return (small);
 }

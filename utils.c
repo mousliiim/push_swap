@@ -6,7 +6,7 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 02:38:15 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/01/16 01:17:25 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/01/31 06:39:23 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,23 +28,31 @@ int	ft_atoi2(const char *nptr)
 		nptr++;
 	}
 	if (*nptr == '-' || *nptr == '+' || *nptr == ' ' || *nptr == '\0')
-		ft_error();
+		ft_error(0);
 	while (*nptr >= '0' && *nptr <= '9')
 	{
 		result = result * 10 + *nptr - '0';
 		if ((result * sign) > INT_MAX || (result * sign) < INT_MIN)
-			ft_error();
+			ft_error(0);
 		nptr++;
 	}
 	if (ft_isdigit(*nptr))
-		ft_error();
+		ft_error(0);
 	return (result * sign);
 }
 
-void	ft_error(void)
+void	ft_error(int nb)
 {
-	ft_putstr_fd("Error\n", 2);
-	exit(1);
+	if (nb == 0)
+	{
+		ft_putstr_fd("Error\n", 2);
+		exit(1);
+	}
+	if (nb == 1)
+	{
+		ft_putstr_fd("Memory Allocation Failed\n", 2);
+		exit(1);
+	}
 }
 
 void	display_lst(t_stack *lst, char c)
@@ -58,7 +66,7 @@ void	display_lst(t_stack *lst, char c)
 	while (temp != NULL)
 	{
 		++i;
-		printf("\t Contenu du noeud [%d] : %d\n", i, temp->number);
+		ft_printf("\t Contenu du noeud [%d] : %d\n", i, temp->number);
 		temp = temp->next;
 	}
 	ft_printf("\n   ******************************************\n");
@@ -89,43 +97,13 @@ t_stack	*find_small_nb(t_data *stack)
 	{
 		if (curr->next != NULL)
 		{
-
 			if (small > curr->next->number)
 			{
-				small = curr -> next -> number;
-				little = curr -> next;
+				small = curr->next->number;
+				little = curr->next;
 			}
 		}
 		curr = curr->next;
 	}
 	return (little);
 }
-
-/*\*/
-void	benchtest(int onoff, t_data *stack)
-{
-	if (onoff == 1)
-	{
-		ft_printf("\n\t%s   ********************%s\n", GREEN, END);
-		ft_printf("\t   %s*%s BENCHTEST [ %sON%s ] %s*%s",
-			GREEN, END, GREEN, END, GREEN, END);
-		ft_printf("\n\t%s   ********************%s\n", GREEN, END);
-		if (stack->stack_a)
-			ft_printf("\n\t  Nb count STACK A = [%d]\n", stack->counter_a);
-		if (stack->stack_b)
-			ft_printf("\n\t  Nb count STACK B = [%d]\n", stack->counter_b);
-		ft_printf("\n   ******************************************\n");
-		if (stack->stack_a)
-			display_lst(stack->stack_a, 'A');
-		else
-			ft_printf("\t\t%sSTACK A IS EMPTY !%s\n", RED, END);
-		if (stack->stack_b)
-			display_lst(stack->stack_b, 'B');
-		else
-			ft_printf("\t     %sSTACK B IS EMPTY !%s\n", RED, END);
-	}
-	if (onoff == 0)
-		ft_printf("\t     %s*%s BENCHTEST [ %sOFF%s ] %s*%s",
-			RED, END, RED, END, RED, END);
-}
-/**/

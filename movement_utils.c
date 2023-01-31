@@ -6,7 +6,7 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 21:30:40 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/01/13 21:33:53 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/01/31 06:40:11 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,38 @@ t_stack	*ft_find_beforelast(t_stack *tmp)
 	while (tmp->next->next != NULL)
 			tmp = tmp->next;
 	return (tmp);
+}
+
+void	ft_pushmin(t_data *stack)
+{
+	static t_stack	*small = NULL;
+	static t_stack	*curr = NULL;
+	int				index;
+
+	curr = stack->stack_a;
+	small = find_small_nb(stack);
+	index = ft_find_nb_list_index(stack->stack_a, stack, small->number, 'o');
+	while (stack->stack_a->number != small->number)
+	{
+		if (index <= stack->counter_a / 2)
+			ft_ra_rb(stack, 'a');
+		else
+			ft_rra_rrb(stack, 'a');
+	}
+	ft_push_stack(stack, 'b');
+}
+
+void	ft_three_nb_algo_movement(t_data *stack, t_stack *small)
+{
+	if (!stack)
+		ft_error(1);
+	if (stack->stack_a->number > stack->stack_a->next->number
+		&& stack->stack_a->next->next->number == small->number)
+	{
+		ft_sa_sb(stack, 'a');
+		ft_rra_rrb(stack, 'a');
+	}
+	if (stack->stack_a->number < stack->stack_a->next->next->number
+		&& stack->stack_a->next->number == small->number)
+		ft_sa_sb(stack, 'a');
 }
