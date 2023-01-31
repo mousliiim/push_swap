@@ -58,13 +58,8 @@ int	*ft_lis(int array_lis[], int array_lis2[], t_data *stack)
 	return (tab);
 }
 
-long	ft_nb_superior_bound(t_stack *node, t_data *stack)
+long	ft_nb_superior_inc(t_stack *curr_a, t_stack *node, long supbound)
 {
-	static t_stack	*curr_a = NULL;
-	long			supbound;
-
-	supbound = 2147483646;
-	curr_a = stack->stack_a;
 	while (curr_a)
 	{
 		if (curr_a->number > node->number)
@@ -74,6 +69,17 @@ long	ft_nb_superior_bound(t_stack *node, t_data *stack)
 		}
 		curr_a = curr_a->next;
 	}
+	return (supbound);
+}
+
+long	ft_nb_superior_bound(t_stack *node, t_data *stack)
+{
+	static t_stack	*curr_a = NULL;
+	long			supbound;
+
+	supbound = 2147483646;
+	curr_a = stack->stack_a;
+	supbound = ft_nb_superior_inc(curr_a, node, supbound);
 	curr_a = stack->stack_a;
 	while (curr_a)
 	{
