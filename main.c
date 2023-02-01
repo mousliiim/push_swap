@@ -6,7 +6,7 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:56:26 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/01/31 06:40:43 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/02/01 16:19:37 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,10 @@ static void	ft_parse_sort(t_data *stack)
 	if (stack->counter_a == 4 || stack->counter_a == 5)
 		ft_five_nb_algo(stack);
 	if (stack->counter_a > 5)
-		ft_big_nb_algo(stack, if_need);
+	{
+		ft_init_lis(stack);
+		ft_big_nb_algo(stack);
+	}
 }
 
 static void	init_push_swap(int argc, char **argv, t_data *stack, char **temp)
