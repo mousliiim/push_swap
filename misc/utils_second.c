@@ -6,11 +6,11 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 02:52:53 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/01/31 06:39:31 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/02/01 17:14:38 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 t_stack	*ft_lstlaste(t_stack *lst)
 {

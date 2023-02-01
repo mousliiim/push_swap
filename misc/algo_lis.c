@@ -6,11 +6,11 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 13:35:55 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/02/01 16:53:53 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/02/01 17:14:18 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 static int	*ft_fill_lis2(t_data *stack, int *array_lis, int *array_lis2)
 {

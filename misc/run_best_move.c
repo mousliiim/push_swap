@@ -6,11 +6,11 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 16:36:18 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/02/01 16:54:00 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/02/01 17:14:33 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 void	ft_best_is_rr_or_rrr(t_data *stack, int choice, int i, int j)
 {

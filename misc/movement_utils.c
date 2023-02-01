@@ -6,11 +6,11 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 21:30:40 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/01/31 06:40:11 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/02/01 17:14:26 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 void	ft_rotate_ra_rb(t_data *stack, t_stack *last, char c, int temp)
 {

@@ -4,8 +4,8 @@ LIBFT			=	includes/libft/libft.a
 
 PRINTF			=	includes/ft_printf/libftprintf.a
 
-SRCS			=	main.c parsing.c movement.c movement_utils.c utils.c utils_second.c sort_algo.c algo_lis.c \
-					run_best_move.c find_best_move.c
+SRCS			=	main.c misc/parsing.c misc/movement.c misc/movement_utils.c misc/utils.c misc/utils_second.c misc/sort_algo.c misc/algo_lis.c \
+					misc/run_best_move.c misc/find_best_move.c
 
 # Colors
 DEF_COLOR = \033[0;39m

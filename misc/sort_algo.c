@@ -6,11 +6,11 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 02:55:02 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/02/01 16:41:09 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/02/01 17:16:17 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 void	ft_optimal_moves_finder(t_data *stack)
 {
@@ -38,6 +38,7 @@ void	ft_optimal_moves_finder(t_data *stack)
 		ft_countdatamove(stack, tab);
 	curr_b = curr_b->next;
 	}
+	free(stack->move);
 }
 
 static void	ft_bestmove(t_data *stack)

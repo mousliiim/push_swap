@@ -6,11 +6,11 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 16:41:24 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/02/01 16:42:51 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/02/01 17:14:24 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 static void	ft_find_best_data(t_data *stack, int *move, int *tab)
 {
