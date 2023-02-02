@@ -6,40 +6,11 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:56:26 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/02/01 16:19:37 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/02/02 05:48:51 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-static void	ft_three_nb_algo(t_data *stack, int i)
-{
-	static t_stack	*small = NULL;
-	static t_stack	*curr = NULL;
-
-	if (!stack)
-		ft_error(0);
-	i = 1;
-	small = find_small_nb(stack);
-	curr = stack->stack_a;
-	while (curr != NULL)
-	{
-		if (i == 2 && curr->number == small->number
-			&& stack->stack_a->number > stack->stack_a->next->next->number)
-			ft_ra_rb(stack, 'a');
-		if (i == 1 && curr->number == small->number)
-		{
-			ft_sa_sb(stack, 'a');
-			ft_ra_rb(stack, 'a');
-		}
-		if (i == 3 && curr->number == small->number
-			&& stack->stack_a->number < stack->stack_a->next->number)
-			ft_rra_rrb(stack, 'a');
-		curr = curr->next;
-		i++;
-	}
-	ft_three_nb_algo_movement(stack, small);
-}
 
 static void	ft_five_nb_algo(t_data *stack)
 {
@@ -73,14 +44,11 @@ static void	ft_parse_sort(t_data *stack)
 	}
 }
 
-static void	init_push_swap(int argc, char **argv, t_data *stack, char **temp)
+void	ft_fill_stack_a(int argc, char **argv, t_data *stack, char **temp)
 {
-	int				i;
-	int				j;
+	int	i;
+	int	j;
 
-	stack = ft_calloc(1, sizeof(t_data));
-	if (!stack)
-		ft_error(1);
 	i = 0;
 	while (++i < argc)
 	{
@@ -89,16 +57,38 @@ static void	init_push_swap(int argc, char **argv, t_data *stack, char **temp)
 		while (temp[++j])
 		{
 			if (!ft_parsing(temp[j]))
-				ft_error(0);
-			ft_lstaddback(&stack->stack_a, ft_addstack(ft_atoi2(temp[j])));
+				ft_free_error(stack, temp);
+			ft_lstaddback(&stack->stack_a,
+				ft_addstack(ft_atoi2(temp[j], stack, temp)));
 			stack->counter_a++;
 		}
+		while (j--)
+			free(temp[j]);
+		free(temp);
 	}
-	ft_checkdouble(stack->stack_a);
+}
+
+static void	init_push_swap(int argc, char **argv, t_data *stack, char **temp)
+{
+	stack = ft_calloc(1, sizeof(t_data));
+	if (!stack)
+		ft_error(1);
+	ft_fill_stack_a(argc, argv, stack, temp);
+	if (ft_checkdouble(stack->stack_a))
+	{
+		ft_free(stack->stack_a);
+		free(stack);
+		ft_error(0);
+	}
 	if (ft_already_sort(stack->stack_a))
+	{
+		ft_free(stack->stack_a);
+		free(stack);
 		exit(0);
+	}
 	ft_parse_sort(stack);
-	benchtest(BENCH, stack);
+	ft_free(stack->stack_a);
+	free(stack);
 }
 
 int	main(int argc, char *argv[])

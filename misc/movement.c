@@ -6,7 +6,7 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 02:42:14 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/02/01 17:14:28 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:09:25 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,51 +53,49 @@ void	ft_sa_sb(t_data *stack, char c)
 
 void	ft_ra_rb(t_data *stack, char c)
 {
-	int				temp;
 	static t_stack	*last = NULL;
+	static t_stack	*head = NULL;
 
 	if (!stack)
 		ft_error(1);
-	temp = 0;
 	if (c == 'a' && stack->stack_a)
 	{
-		ft_rotate_ra_rb(stack, last, 'a', temp);
+		ft_rotate_ra_rb(stack, last, head, 'a');
 		ft_printf("ra\n");
 	}
 	if (c == 'b' && stack->stack_b)
 	{
-		ft_rotate_ra_rb(stack, last, 'b', temp);
+		ft_rotate_ra_rb(stack, last, head, 'b');
 		ft_printf("rb\n");
 	}
 	if (c == '2' && (stack->stack_a && stack->stack_b))
 	{
-		ft_rotate_ra_rb(stack, last, 'a', temp);
-		ft_rotate_ra_rb(stack, last, 'b', temp);
+		ft_rotate_ra_rb(stack, last, head, 'a');
+		ft_rotate_ra_rb(stack, last, head, 'b');
 		ft_printf("rr\n");
 	}
 }
 
 void	ft_rra_rrb(t_data *stack, char c)
 {
-	static t_stack	*head = NULL;
 	static t_stack	*last = NULL;
 
 	if (!stack)
 		ft_error(1);
 	if (c == 'a' && stack->stack_a)
 	{
-		ft_rotate_rrb_rra(stack, last, head, 'a');
+		ft_rotate_rrb_rra(stack, last, 'a');
 		ft_printf("rra\n");
 	}
 	if (c == 'b' && stack->stack_b)
 	{
-		ft_rotate_rrb_rra(stack, last, head, 'b');
+		ft_rotate_rrb_rra(stack, last, 'b');
 		ft_printf("rrb\n");
 	}
 	if (c == '2' && (stack->stack_a && stack->stack_b))
 	{
-		ft_rotate_rrb_rra(stack, last, head, 'a');
-		ft_rotate_rrb_rra(stack, last, head, 'b');
+		ft_rotate_rrb_rra(stack, last, 'a');
+		ft_rotate_rrb_rra(stack, last, 'b');
 		ft_printf("rrr\n");
 	}
 }

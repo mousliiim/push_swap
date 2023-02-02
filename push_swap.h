@@ -6,7 +6,7 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 21:00:29 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/02/01 16:52:39 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/02/02 05:50:10 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define GREEN "\033[0;32m"
 # define RED "\033[5;31m"
 # define END "\033[0m"
-# define INT_MIN -2147483648
+# define INT_MIN -2147483647
 # define INT_MAX 2147483647
 
 typedef struct s_stack
@@ -54,13 +54,16 @@ typedef struct s_data
 	int		lis_count;
 }	t_data;
 
-void	ft_checkbefore(t_data *stack);
+/* Fonction qui sert a liberer la memoire pour mon split et pour ma pile */
+void	ft_free_split(char **split);
+void	ft_free(t_stack *stack_a);
+void	ft_free_error(t_data *stack, char **temp);
 /** Vérifie si la pile est déjà triée **/
 int		ft_already_sort(t_stack *lst);
 /** Vérifie si la pile contient des nombres doubles **/
 int		ft_checkdouble(t_stack *lst);
 /** Convertit une chaine de caractères en entier **/
-int		ft_atoi2(const char *nptr);
+int		ft_atoi2(const char *nptr, t_data *stack, char **temp);
 /** Affiche une erreur par rapport au int donner en parametre **/
 void	ft_error(int nb);
 /** Affiche la pile A et/ou B **/
@@ -73,16 +76,14 @@ t_stack	*ft_addstack(int nb);
 int		ft_already_sort(t_stack *lst);
 /** Effectue un swap entre les deux premiers éléments de la pile **/
 void	ft_sa_sb(t_data *stack, char c);
-/** Trouve l’avant-dernier noeud de la pile **/
-t_stack	*ft_find_beforelast(t_stack *tmp);
 /** Pousse un élément de la pile A vers la pile B ou l'inverse **/
 void	ft_push_stack(t_data *stack, char c);
 /** Effectue une rotation entre la pile A et la pile B **/
 void	ft_ra_rb(t_data *stack, char c);
-void	ft_rotate_ra_rb(t_data *stack, t_stack *last, char c, int temp);
+void	ft_rotate_ra_rb(t_data *stack, t_stack *last, t_stack *head, char c);
 /** Effectue une rotation inverse entre la pile A et la pile B **/
 void	ft_rra_rrb(t_data *stack, char c);
-void	ft_rotate_rrb_rra(t_data *stack, t_stack *last, t_stack *head, char c);
+void	ft_rotate_rrb_rra(t_data *stack, t_stack *last, char c);
 /** Trouve le nombre le plus petit de la pile **/
 t_stack	*find_small_nb(t_data *stack);
 /** Mouvement pour trier l'algo de trois **/
@@ -116,4 +117,6 @@ void	ft_best_is_rr_or_rrr(t_data *stack, int choice, int i, int j);
 /* Si le meilleur mouvement a appliquer est RA ou RB | RRA ou RRB */
 void	ft_best_is_ra_or_rb(t_data *stack);
 void	ft_best_is_rra_or_rrb(t_data *stack);
+/* Applique un algorithme de tri pour 3 chiffres */
+void	ft_three_nb_algo(t_data *stack, int i);
 #endif

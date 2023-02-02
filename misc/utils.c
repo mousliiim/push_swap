@@ -6,13 +6,13 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 02:38:15 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/02/01 17:16:42 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/02/02 05:45:55 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-int	ft_atoi2(const char *nptr)
+int	ft_atoi2(const char *nptr, t_data *stack, char **temp)
 {
 	int		sign;
 	long	result;
@@ -27,17 +27,15 @@ int	ft_atoi2(const char *nptr)
 			sign = -1;
 		nptr++;
 	}
-	if (*nptr == '-' || *nptr == '+' || *nptr == ' ' || *nptr == '\0')
-		ft_error(0);
 	while (*nptr >= '0' && *nptr <= '9')
 	{
 		result = result * 10 + *nptr - '0';
 		if ((result * sign) > INT_MAX || (result * sign) < INT_MIN)
-			ft_error(0);
+			ft_free_error(stack, temp);
 		nptr++;
 	}
-	if (ft_isdigit(*nptr))
-		ft_error(0);
+	if (*nptr >= '0' && *nptr <= '9' && ft_isdigit(*nptr + 1))
+		ft_free_error(stack, temp);
 	return (result * sign);
 }
 
@@ -76,7 +74,7 @@ t_stack	*ft_addstack(int nb)
 {
 	t_stack	*ptr;
 
-	ptr = ft_calloc(1, sizeof(t_stack));
+	ptr = malloc(sizeof(t_stack));
 	if (!ptr)
 		return (NULL);
 	ptr->number = nb;

@@ -6,11 +6,40 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 02:55:02 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/02/01 17:16:17 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/02/02 05:48:34 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
+
+void	ft_three_nb_algo(t_data *stack, int i)
+{
+	static t_stack	*small = NULL;
+	static t_stack	*curr = NULL;
+
+	if (!stack)
+		ft_error(0);
+	i = 1;
+	small = find_small_nb(stack);
+	curr = stack->stack_a;
+	while (curr != NULL)
+	{
+		if (i == 2 && curr->number == small->number
+			&& stack->stack_a->number > stack->stack_a->next->next->number)
+			ft_ra_rb(stack, 'a');
+		if (i == 1 && curr->number == small->number)
+		{
+			ft_sa_sb(stack, 'a');
+			ft_ra_rb(stack, 'a');
+		}
+		if (i == 3 && curr->number == small->number
+			&& stack->stack_a->number < stack->stack_a->next->number)
+			ft_rra_rrb(stack, 'a');
+		curr = curr->next;
+		i++;
+	}
+	ft_three_nb_algo_movement(stack, small);
+}
 
 void	ft_optimal_moves_finder(t_data *stack)
 {
@@ -38,7 +67,6 @@ void	ft_optimal_moves_finder(t_data *stack)
 		ft_countdatamove(stack, tab);
 	curr_b = curr_b->next;
 	}
-	free(stack->move);
 }
 
 static void	ft_bestmove(t_data *stack)
@@ -84,6 +112,7 @@ void	ft_big_nb_algo(t_data *stack)
 	{
 		ft_optimal_moves_finder(stack);
 		ft_bestmove(stack);
+		free(stack->move);
 	}
 	ft_sort(stack);
 }

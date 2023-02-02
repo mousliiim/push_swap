@@ -6,7 +6,7 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 02:52:53 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/02/01 17:14:38 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:41:35 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,26 +59,6 @@ int	ft_find_nb_list_index(t_stack *stack, t_data *info, int nb, char c)
 	}
 	return (index);
 }
-
-// void	ft_free_small(t_data **stack, t_stack *head, char **temp, int j)
-// {
-// 	t_stack	*curr;
-// 	t_stack	*tmpnext;
-
-// 	curr = head;
-// 	while (curr)
-// 	{
-// 		tmpnext = curr->next;
-// 		free(curr);
-// 		curr = tmpnext;
-// 	}
-// 	head = NULL;
-// 	free(head);
-// 	while (j--)
-// 		free(temp[j]);
-// 	free(temp);
-// 	free(*stack);
-// }
 
 void	ft_increase_decrease_counter(t_data *stack, char c)
 {

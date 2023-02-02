@@ -6,7 +6,7 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 01:59:09 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/02/01 17:14:30 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/02/02 01:50:25 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,20 @@ int	ft_already_sort(t_stack *lst)
 
 int	ft_parsing(char *str)
 {
+	int	i;
+
+	i = 0;
 	if (!*str)
 		return (0);
-	while (*str)
+	while (str[i] != '\0')
 	{
-		if (!ft_isdigit(*str))
+		if (str[i] == '-' || str[i] == '+')
+			i++;
+		if (str[i] == '-' || str[i] == '+')
 			return (0);
-		str++;
+		if (!ft_isdigit(str[i]))
+			return (0);
+		i++;
 	}
 	return (1);
 }
@@ -66,12 +73,12 @@ int	ft_checkdouble(t_stack *lst)
 		while (cmp)
 		{
 			if (begin->number == cmp->number)
-				ft_error(0);
+				return (1);
 			cmp = cmp->next;
 		}
 		begin = begin->next;
 	}
-	return (1);
+	return (0);
 }
 
 int	ft_verif(int nb, int *lis_tab, int sizelis)
