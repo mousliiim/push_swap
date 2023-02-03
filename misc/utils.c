@@ -6,7 +6,7 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 02:38:15 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/02/03 03:28:07 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/02/03 05:17:21 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,17 @@ void	display_lst(t_stack *lst, char c)
 	i = 0;
 	temp = lst;
 	ft_printf("\n   ****** DISPLAY CONTENT LINKED LIST %c *****\n\n", c);
-	while (temp != NULL)
+	if (temp)
 	{
-		++i;
-		ft_printf("\t Contenu du noeud [%d] : %d\n", i, temp->number);
-		temp = temp->next;
+		while (temp != NULL)
+		{
+			++i;
+			ft_printf("\t Contenu du noeud [%d] : %d\n", i, temp->number);
+			temp = temp->next;
+		}
 	}
+	else
+		ft_printf("Error : List is empty\n");
 	ft_printf("\n   ******************************************\n");
 }
 

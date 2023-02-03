@@ -6,7 +6,7 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 02:52:53 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/02/03 02:54:38 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/02/03 05:15:03 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,20 +84,18 @@ void	benchtest(int onoff, t_data *stack)
 		ft_printf("\t   %s*%s BENCHTEST [ %sON%s ] %s*%s",
 			GREEN, END, GREEN, END, GREEN, END);
 		ft_printf("\n\t%s   ********************%s\n", GREEN, END);
-		if (stack->stack_a)
+		if (stack && stack->stack_a)
 			ft_printf("\n\t  Nb count STACK A = [%d]\n", stack->counter_a);
-		if (stack->stack_b)
+		if (stack && stack->stack_b)
 			ft_printf("\n\t  Nb count STACK B = [%d]\n", stack->counter_b);
 		ft_printf("\n   ******************************************\n");
-		if (stack->stack_a)
+		if (stack && stack->stack_a)
 			display_lst(stack->stack_a, 'A');
 		else
 			ft_printf("\t\t%sSTACK A IS EMPTY !%s\n", RED, END);
-		if (stack->stack_b)
+		if (stack && stack->stack_b)
 			display_lst(stack->stack_b, 'B');
 		else
 			ft_printf("\t     %sSTACK B IS EMPTY !%s\n", RED, END);
 	}
-	if (onoff == 0)
-		;
 }
