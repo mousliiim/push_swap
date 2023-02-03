@@ -6,7 +6,7 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:56:26 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/02/03 04:26:33 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/02/03 05:09:34 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,6 @@ void	ft_fill_stack_a(int argc, char **argv, t_data *stack, char **temp)
 
 static void	init_push_swap(int argc, char **argv, t_data *stack, char **temp)
 {
-	if (!argv[1][0])
-		return ;
 	stack = ft_calloc(1, sizeof(t_data));
 	if (!stack)
 		ft_error(1);
@@ -100,10 +98,5 @@ int	main(int argc, char *argv[])
 	if (argc > 1)
 		init_push_swap(argc, argv, stack, temp);
 	else
-	{
-		ft_printf("\n\t./push_swap %sNumber(s)%s or %s\"Number(s)\"%s\n",
-			RED, END, RED, END);
-		ft_printf("\n\t    Ex: ./push_swap 15 2 3 9 1\n\
-	 Ex: ./push_swap \"19 7 1 19 2 0\"\n\n");
-	}
+		return (0);
 }
