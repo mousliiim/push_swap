@@ -6,7 +6,7 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 05:03:05 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/02/02 05:48:20 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/02/03 03:27:46 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,21 @@ void	ft_free_error(t_data *stack, char **temp)
 	ft_free_split(temp);
 	free(stack);
 	ft_error(0);
+}
+
+void	ft_free_error2(t_data *stack, int *array_lis, int *array_lis2)
+{
+	ft_free(stack->stack_a);
+	free(array_lis2);
+	free(array_lis);
+	free(stack);
+	ft_error(1);
+}
+
+void	ft_free_error_3(t_data *stack)
+{
+	ft_free(stack->stack_a);
+	ft_free(stack->stack_b);
+	free(stack);
+	ft_error(1);
 }

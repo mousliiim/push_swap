@@ -6,7 +6,7 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 02:52:53 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/02/01 20:41:35 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/02/03 02:54:38 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,6 @@ int	ft_find_nb_list_index(t_stack *stack, t_data *info, int nb, char c)
 
 void	ft_increase_decrease_counter(t_data *stack, char c)
 {
-	if (!stack)
-		ft_error(1);
 	if (c == 'a')
 	{
 		if (stack->counter_b)

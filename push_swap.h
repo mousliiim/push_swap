@@ -6,7 +6,7 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 21:00:29 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/02/02 05:50:10 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/02/03 03:35:38 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define GREEN "\033[0;32m"
 # define RED "\033[5;31m"
 # define END "\033[0m"
-# define INT_MIN -2147483647
+# define INT_MIN -2147483648
 # define INT_MAX 2147483647
 
 typedef struct s_stack
@@ -34,10 +34,6 @@ typedef struct s_stack
 
 typedef struct s_cmove
 {
-	int		c_ra;
-	int		c_rb;
-	int		c_rra;
-	int		c_rrb;
 	int		bestmove;
 	int		tab[4];
 	int		booll[4];
@@ -54,10 +50,12 @@ typedef struct s_data
 	int		lis_count;
 }	t_data;
 
-/* Fonction qui sert a liberer la memoire pour mon split et pour ma pile */
+/* Fonction qui sert a liberer la memoire */
 void	ft_free_split(char **split);
 void	ft_free(t_stack *stack_a);
 void	ft_free_error(t_data *stack, char **temp);
+void	ft_free_error2(t_data *stack, int *array_lis, int *array_lis2);
+void	ft_free_error_3(t_data *stack);
 /** Vérifie si la pile est déjà triée **/
 int		ft_already_sort(t_stack *lst);
 /** Vérifie si la pile contient des nombres doubles **/
@@ -71,7 +69,7 @@ void	display_lst(t_stack *lst, char c);
 /* Vérifie la validité de la chaine de caractère entrée par l'utilisateur */
 int		ft_parsing(char *str);
 /** Ajoute un nouvel élément à la pile **/
-t_stack	*ft_addstack(int nb);
+t_stack	*ft_addstack(int nb, t_data *stack, char **temp);
 /** Vérifie si la pile est déjà triée **/
 int		ft_already_sort(t_stack *lst);
 /** Effectue un swap entre les deux premiers éléments de la pile **/

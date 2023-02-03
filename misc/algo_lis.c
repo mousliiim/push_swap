@@ -6,7 +6,7 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 13:35:55 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/02/01 17:14:18 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/02/03 03:13:12 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	*ft_lis(int *array_lis, int *array_lis2, t_data *stack)
 	count = ft_size_lis(array_lis2, stack);
 	tab = malloc(sizeof(int) * count);
 	if (!tab)
-		ft_error(1);
+		ft_free_error2(stack, array_lis, array_lis2);
 	stack->lis_count = count;
 	index = count - 2;
 	i = stack->counter_a;
@@ -77,7 +77,7 @@ static int	*ft_lis(int *array_lis, int *array_lis2, t_data *stack)
 
 static void	ft_sort_lis(t_data *stack, int *lis_tab)
 {
-	t_stack	*curr;
+	static t_stack	*curr = NULL;
 
 	while (stack->counter_a != stack->lis_count - 1)
 	{
@@ -91,18 +91,16 @@ static void	ft_sort_lis(t_data *stack, int *lis_tab)
 
 void	ft_init_lis(t_data *stack)
 {
-	t_stack	*curr;
-	int		i;
-	int		*array_lis;
-	int		*array_lis2;
-	int		*lis_tab;
+	static t_stack	*curr = NULL;
+	int				i;
+	int				*array_lis;
+	int				*array_lis2;
+	int				*lis_tab;
 
 	array_lis = malloc(sizeof(int) * stack->counter_a);
-	if (!array_lis)
-		ft_error(1);
 	array_lis2 = malloc(sizeof(int) * stack->counter_a);
-	if (!array_lis2)
-		ft_error(1);
+	if (!array_lis || !array_lis2)
+		ft_free_error2(stack, array_lis, array_lis2);
 	curr = stack->stack_a;
 	i = -1;
 	while (curr != NULL)

@@ -6,7 +6,7 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 02:42:14 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/02/01 20:09:25 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/02/03 02:53:58 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ static void	ft_ss(t_data *stack)
 {
 	int	temp;
 
-	if (!stack)
-		ft_error(1);
 	temp = stack->stack_a->number;
 	stack->stack_a->number = stack->stack_a->next->number;
 	stack->stack_a->next->number = temp;
@@ -31,8 +29,6 @@ void	ft_sa_sb(t_data *stack, char c)
 {
 	int	temp;
 
-	if (!stack)
-		ft_error(1);
 	if (c == 'a' && stack->stack_a)
 	{
 		temp = stack->stack_a->number;
@@ -56,8 +52,6 @@ void	ft_ra_rb(t_data *stack, char c)
 	static t_stack	*last = NULL;
 	static t_stack	*head = NULL;
 
-	if (!stack)
-		ft_error(1);
 	if (c == 'a' && stack->stack_a)
 	{
 		ft_rotate_ra_rb(stack, last, head, 'a');
@@ -80,8 +74,6 @@ void	ft_rra_rrb(t_data *stack, char c)
 {
 	static t_stack	*last = NULL;
 
-	if (!stack)
-		ft_error(1);
 	if (c == 'a' && stack->stack_a)
 	{
 		ft_rotate_rrb_rra(stack, last, 'a');
@@ -105,8 +97,6 @@ void	ft_push_stack(t_data *stack, char c)
 	static t_stack	*tmp = NULL;
 	static t_stack	*prev = NULL;
 
-	if (!stack)
-		ft_error(1);
 	if (c == 'a' && stack->stack_b)
 	{
 		tmp = stack->stack_b;

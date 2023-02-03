@@ -6,7 +6,7 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:56:26 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/02/02 05:48:51 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/02/03 04:26:33 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ static void	ft_parse_sort(t_data *stack)
 {
 	int	if_need;
 
-	if (!stack)
-		ft_error(0);
 	if_need = 0;
 	if (stack->counter_a == 2)
 		ft_sa_sb(stack, 'a');
@@ -59,7 +57,7 @@ void	ft_fill_stack_a(int argc, char **argv, t_data *stack, char **temp)
 			if (!ft_parsing(temp[j]))
 				ft_free_error(stack, temp);
 			ft_lstaddback(&stack->stack_a,
-				ft_addstack(ft_atoi2(temp[j], stack, temp)));
+				ft_addstack(ft_atoi2(temp[j], stack, temp), stack, temp));
 			stack->counter_a++;
 		}
 		while (j--)
@@ -70,6 +68,8 @@ void	ft_fill_stack_a(int argc, char **argv, t_data *stack, char **temp)
 
 static void	init_push_swap(int argc, char **argv, t_data *stack, char **temp)
 {
+	if (!argv[1][0])
+		return ;
 	stack = ft_calloc(1, sizeof(t_data));
 	if (!stack)
 		ft_error(1);
@@ -87,6 +87,7 @@ static void	init_push_swap(int argc, char **argv, t_data *stack, char **temp)
 		exit(0);
 	}
 	ft_parse_sort(stack);
+	benchtest(BENCH, stack);
 	ft_free(stack->stack_a);
 	free(stack);
 }

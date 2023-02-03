@@ -6,7 +6,7 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 02:55:02 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/02/02 05:48:34 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/02/03 03:10:48 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ void	ft_three_nb_algo(t_data *stack, int i)
 	static t_stack	*small = NULL;
 	static t_stack	*curr = NULL;
 
-	if (!stack)
-		ft_error(0);
 	i = 1;
 	small = find_small_nb(stack);
 	curr = stack->stack_a;
@@ -51,7 +49,7 @@ void	ft_optimal_moves_finder(t_data *stack)
 
 	stack->move = ft_calloc(1, sizeof(t_cmove));
 	if (!stack->move)
-		ft_error(1);
+		ft_free_error_3(stack);
 	curr_b = stack->stack_b;
 	while (curr_b != NULL)
 	{

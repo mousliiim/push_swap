@@ -6,7 +6,7 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 02:38:15 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/02/02 05:45:55 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/02/03 03:28:07 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ int	ft_atoi2(const char *nptr, t_data *stack, char **temp)
 			sign = -1;
 		nptr++;
 	}
-	while (*nptr >= '0' && *nptr <= '9')
+	while (*nptr && (*nptr >= '0' && *nptr <= '9'))
 	{
 		result = result * 10 + *nptr - '0';
 		if ((result * sign) > INT_MAX || (result * sign) < INT_MIN)
 			ft_free_error(stack, temp);
 		nptr++;
 	}
-	if (*nptr >= '0' && *nptr <= '9' && ft_isdigit(*nptr + 1))
+	if (*nptr)
 		ft_free_error(stack, temp);
 	return (result * sign);
 }
@@ -70,13 +70,18 @@ void	display_lst(t_stack *lst, char c)
 	ft_printf("\n   ******************************************\n");
 }
 
-t_stack	*ft_addstack(int nb)
+t_stack	*ft_addstack(int nb, t_data *stack, char **temp)
 {
 	t_stack	*ptr;
 
 	ptr = malloc(sizeof(t_stack));
 	if (!ptr)
-		return (NULL);
+	{
+		ft_free(stack->stack_a);
+		ft_free_split(temp);
+		free(stack);
+		ft_error(1);
+	}
 	ptr->number = nb;
 	ptr->next = NULL;
 	return (ptr);

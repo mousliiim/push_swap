@@ -6,7 +6,7 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 16:36:18 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/02/01 17:14:33 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/02/03 02:54:55 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ void	ft_best_is_rra_or_rrb(t_data *stack)
 
 static int	ft_nb_superior_inc(t_stack *curr_a, t_stack *node, long supbound)
 {
+	if (!curr_a || !node)
+		ft_error(1);
 	while (curr_a)
 	{
 		if (curr_a->number > node->number)

@@ -6,7 +6,7 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 21:30:40 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/02/01 20:11:37 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/02/03 02:53:29 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,6 @@ void	ft_pushmin(t_data *stack)
 
 void	ft_three_nb_algo_movement(t_data *stack, t_stack *small)
 {
-	if (!stack)
-		ft_error(1);
 	if (stack->stack_a->number > stack->stack_a->next->number
 		&& stack->stack_a->next->next->number == small->number)
 	{

@@ -6,7 +6,7 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 01:59:09 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/02/02 01:50:25 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/02/03 01:24:25 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@ int	ft_already_sort(t_stack *lst)
 {
 	t_stack	*begin;
 	t_stack	*size;
-	int		i;
 	int		lstsize;
 
+	if (!lst)
+		ft_error(1);
 	lstsize = 0;
 	size = lst;
 	while (size)
@@ -26,8 +27,7 @@ int	ft_already_sort(t_stack *lst)
 			lstsize++;
 			size = size->next;
 	}
-	i = 0;
-	while (i < lstsize)
+	while (lstsize--)
 	{
 		begin = lst;
 		while (begin->next != NULL)
@@ -36,7 +36,6 @@ int	ft_already_sort(t_stack *lst)
 				return (0);
 			begin = begin->next;
 		}
-		i++;
 	}
 	return (1);
 }
@@ -66,6 +65,8 @@ int	ft_checkdouble(t_stack *lst)
 	t_stack	*begin;
 	t_stack	*cmp;
 
+	if (!lst)
+		ft_error(1);
 	begin = lst;
 	while (begin)
 	{
