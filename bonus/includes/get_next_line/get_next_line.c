@@ -6,11 +6,12 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 06:13:33 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/02/03 06:14:10 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/02/04 04:45:32 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
 char	*get_next_line(int fd)
 {
@@ -36,7 +37,7 @@ char	*ft_read_buffer(int fd, char *buffer)
 	str = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!str)
 		return (NULL);
-	while (!ft_strchr(buffer, '\n') && readret != 0)
+	while (!ft_strchre(buffer, '\n') && readret != 0)
 	{
 		readret = read(fd, str, BUFFER_SIZE);
 		if (readret < 0)
@@ -45,7 +46,7 @@ char	*ft_read_buffer(int fd, char *buffer)
 			return (NULL);
 		}
 		str[readret] = '\0';
-		buffer = ft_strjoin(buffer, str);
+		buffer = ft_strjoine(buffer, str);
 	}
 	free(str);
 	return (buffer);
@@ -89,12 +90,12 @@ char	*ft_read_next_buffer(char *buffer)
 	j = 0;
 	while (buffer[i] && buffer[i] != '\n')
 		i++;
-	if (!buffer[i])
+	if (!buffer[i] || buffer[i] == '\n')
 	{
 		free(buffer);
 		return (NULL);
 	}
-	str = (char *)malloc(sizeof(char) * (ft_strlen(buffer) - i + 1));
+	str = (char *)malloc(sizeof(char) * (ft_strlene(buffer) - i + 1));
 	if (!str)
 		return (NULL);
 	i++;

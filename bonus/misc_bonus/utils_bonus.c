@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 02:38:15 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/02/03 05:17:21 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/02/04 07:33:12 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "../push_swap_bonus.h"
 
 int	ft_atoi2(const char *nptr, t_data *stack, char **temp)
 {
@@ -92,26 +92,12 @@ t_stack	*ft_addstack(int nb, t_data *stack, char **temp)
 	return (ptr);
 }
 
-t_stack	*find_small_nb(t_data *stack)
+int	ft_strcmp(char *s1, char *s2)
 {
-	static t_stack	*curr = NULL;
-	static t_stack	*little = NULL;
-	int				small;
+	int	i;
 
-	curr = stack->stack_a;
-	little = curr;
-	small = curr -> number;
-	while (curr != NULL)
-	{
-		if (curr->next != NULL)
-		{
-			if (small > curr->next->number)
-			{
-				small = curr->next->number;
-				little = curr->next;
-			}
-		}
-		curr = curr->next;
-	}
-	return (little);
+	i = 0;
+	while (s1[i] && s2[i] && s1[i] == s2[i])
+		i++;
+	return (s1[i] - s2[i]);
 }

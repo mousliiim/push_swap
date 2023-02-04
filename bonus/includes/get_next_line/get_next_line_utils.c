@@ -6,13 +6,13 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 06:14:14 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/02/03 06:14:23 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/02/04 02:08:56 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strchr(char *s, int c)
+char	*ft_strchre(char *s, int c)
 {
 	if (!s)
 		return (NULL);
@@ -23,7 +23,7 @@ char	*ft_strchr(char *s, int c)
 	return (NULL);
 }
 
-size_t	ft_strlen(char *str)
+size_t	ft_strlene(char *str)
 {
 	size_t	i;
 
@@ -35,7 +35,7 @@ size_t	ft_strlen(char *str)
 	return (i);
 }
 
-char	*ft_strjoin(char *buffer, char *str)
+char	*ft_strjoine(char *buffer, char *str)
 {
 	char	*mstr;
 	int		i;
@@ -50,7 +50,7 @@ char	*ft_strjoin(char *buffer, char *str)
 	}
 	if (!str || !buffer)
 		return (NULL);
-	mstr = malloc(sizeof(char) * (ft_strlen(buffer) + ft_strlen(str) + 1));
+	mstr = malloc(sizeof(char) * (ft_strlene(buffer) + ft_strlene(str) + 1));
 	if (!mstr)
 		return (NULL);
 	i = -1;

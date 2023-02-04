@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_second.c                                     :+:      :+:    :+:   */
+/*   utils_second_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 02:52:53 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/02/03 05:15:03 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/02/04 07:33:49 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "../push_swap_bonus.h"
 
 t_stack	*ft_lstlaste(t_stack *lst)
 {
@@ -34,30 +34,15 @@ void	ft_lstaddback(t_stack **lst, t_stack *new)
 		*lst = new;
 }
 
-int	ft_find_nb_list_index(t_stack *stack, t_data *info, int nb, char c)
+void	ft_readline(char **line, t_data *stack)
 {
-	int		index;
-	t_stack	*curr;
-
-	curr = stack;
-	index = 0;
-	while (curr != NULL)
+	*line = get_next_line(0);
+	while (*line)
 	{
-		if (curr->number == nb && c == 'o')
-			break ;
-		if (curr->number == nb && c == 'a')
-			index = 0;
-		if (curr->number == nb && c == 'r')
-		{
-			index = 0;
-			if (curr->next == NULL
-				&& info->counter_b == 1)
-				return (index);
-		}
-		index++;
-		curr = curr->next;
+		ft_sort_entry(*line, stack);
+		free(*line);
+		*line = get_next_line(0);
 	}
-	return (index);
 }
 
 void	ft_increase_decrease_counter(t_data *stack, char c)

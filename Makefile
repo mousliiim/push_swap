@@ -8,16 +8,15 @@ PRINTF			=	includes/ft_printf/libftprintf.a
 
 GNL				=	bonus/includes/get_next_line/get_next_line.c \
 					bonus/includes/get_next_line/get_next_line_utils.c \
-					bonus/includes/get_next_line/get_next_line.h
 
 SRCS			=	main.c misc/parsing.c misc/movement.c misc/movement_utils.c \
 					misc/utils.c misc/utils_second.c misc/sort_algo.c misc/algo_lis.c \
-					misc/run_best_move.c misc/find_best_move.c misc/utils_third.c
+					misc/run_best_move.c misc/find_best_move.c misc/utils_third.c \
 
 SRCS_BONUS 		=	bonus/main_bonus.c bonus/misc_bonus/parsing_bonus.c \
 					bonus/misc_bonus/movement_bonus.c bonus/misc_bonus/movement_utils_bonus.c \
 					bonus/misc_bonus/utils_bonus.c bonus/misc_bonus/utils_second_bonus.c \
-					bonus/misc_bonus/utils_third_bonus.c bonus/misc_bonus/sort_algo_bonus.c \
+					bonus/misc_bonus/utils_third_bonus.c bonus/misc_bonus/find_best_move_bonus.c \
 
 # Colors
 DEF_COLOR = \033[0;39m
@@ -52,7 +51,7 @@ $(NAME) : $(OBJS)
 	@echo "\t\t\t${GREEN}==============================${DEF_COLOR}"
 	@echo "\t\t\t${GREEN}==== ALL IS ${PURPLE}COMPILATED${DEF_COLOR} ✅${GREEN} ====${DEF_COLOR}"
 	@echo "\t\t\t${GREEN}==============================${DEF_COLOR}"
-	@cc $(OBJS) ${LIBFT} ${PRINTF} ${GNL} -o $(NAME)
+	@cc $(OBJS) ${LIBFT} ${PRINTF} -o $(NAME)
 
 
 $(NAME_BONUS) : $(OBJS_BONUS)
@@ -70,7 +69,7 @@ $(NAME_BONUS) : $(OBJS_BONUS)
 	@echo "\t\t\t${GREEN}==============================${DEF_COLOR}"
 	@echo "\t\t\t${GREEN}==== ALL IS ${PURPLE}COMPILATED${DEF_COLOR} ✅${GREEN} ====${DEF_COLOR}"
 	@echo "\t\t\t${GREEN}==============================${DEF_COLOR}"
-	@cc $(OBJS_BONUS) ${LIBFT} ${PRINTF} -o $(NAME_BONUS)
+	@cc $(OBJS_BONUS) ${GNL} ${LIBFT} ${PRINTF} -o $(NAME_BONUS)
 
 bonus: ${NAME_BONUS}
 

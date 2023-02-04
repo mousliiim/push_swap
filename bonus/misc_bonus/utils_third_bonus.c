@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_third.c                                      :+:      :+:    :+:   */
+/*   utils_third_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 05:03:05 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/02/03 04:56:26 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/02/04 07:01:28 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "../push_swap_bonus.h"
 
 void	ft_free(t_stack *stack_a)
 {
@@ -50,13 +50,15 @@ void	ft_free_error(t_data *stack, char **temp)
 	ft_error(0);
 }
 
-void	ft_free_error2(t_data *stack, int *array_lis, int *array_lis2)
+void	ft_free_error2(t_data *stack, char *line)
 {
-	ft_free(stack->stack_a);
-	free(array_lis2);
-	free(array_lis);
+	if (stack->counter_b > 0)
+		ft_free(stack->stack_b);
+	if (stack->counter_a > 0)
+		ft_free(stack->stack_a);
 	free(stack);
-	ft_error(1);
+	free(line);
+	ft_error(0);
 }
 
 void	ft_free_error_3(t_data *stack)
