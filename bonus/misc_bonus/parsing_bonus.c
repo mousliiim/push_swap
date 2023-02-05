@@ -6,7 +6,7 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 01:59:09 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/02/04 01:41:17 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/02/05 06:26:32 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,34 +76,4 @@ int	ft_checkdouble(t_stack *lst)
 		begin = begin->next;
 	}
 	return (0);
-}
-
-int	ft_verif(int nb, int *lis_tab, int sizelis)
-{
-	int	i;
-
-	i = 0;
-	while (i < sizelis)
-	{
-		if (nb == lis_tab[i])
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-int	ft_findsmalltab(int *tab)
-{
-	int	small;
-	int	i;
-
-	i = 0;
-	small = tab[0];
-	while (i < 4)
-	{
-		if (small > tab[i])
-			small = tab[i];
-		i++;
-	}
-	return (small);
 }

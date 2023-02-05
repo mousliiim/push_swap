@@ -16,7 +16,7 @@ SRCS			=	main.c misc/parsing.c misc/movement.c misc/movement_utils.c \
 SRCS_BONUS 		=	bonus/main_bonus.c bonus/misc_bonus/parsing_bonus.c \
 					bonus/misc_bonus/movement_bonus.c bonus/misc_bonus/movement_utils_bonus.c \
 					bonus/misc_bonus/utils_bonus.c bonus/misc_bonus/utils_second_bonus.c \
-					bonus/misc_bonus/utils_third_bonus.c bonus/misc_bonus/find_best_move_bonus.c \
+					bonus/misc_bonus/utils_third_bonus.c \
 
 # Colors
 DEF_COLOR = \033[0;39m
@@ -29,7 +29,7 @@ OBJS_BONUS		= 	${SRCS_BONUS:.c=.o}
 
 HEAD			=	-I includes
 
-CFLAGS			=	-Wall -Werror -Wextra -g3 -D BENCH=0
+CFLAGS			=	-Wall -Werror -Wextra -D BENCH=0
 
 all				:	${NAME}
 

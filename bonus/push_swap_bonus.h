@@ -6,7 +6,7 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 21:23:12 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/02/04 07:34:58 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/02/05 06:20:48 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,6 @@ void	ft_free(t_stack *stack_a);
 void	ft_free_error(t_data *stack, char **temp);
 void	ft_free_error2(t_data *stack, char *line);
 void	ft_free_error_3(t_data *stack);
-void	ft_readline(char **line, t_data *stack);
-void	ft_sort_entry(char *line, t_data *stack);
 /** Vérifie si la pile est déjà triée **/
 int		ft_already_sort(t_stack *lst);
 /** Vérifie si la pile contient des nombres doubles **/
@@ -87,37 +85,18 @@ void	ft_rra_rrb(t_data *stack, char c);
 void	ft_rotate_rrb_rra(t_data *stack, t_stack *last, char c);
 /** Trouve le nombre le plus petit de la pile **/
 t_stack	*find_small_nb(t_data *stack);
-/** Mouvement pour trier l'algo de trois **/
-void	ft_three_nb_algo_movement(t_data *stack, t_stack *small);
 /** Algo si la pile est superieur a 5 chiffres **/
 void	ft_big_nb_algo(t_data *stack);
 /** Trouver le dernier noeud d'une liste **/
 t_stack	*ft_lstlaste(t_stack *lst);
 /** Ajoute un élément à la fin de la pile **/
 void	ft_lstaddback(t_stack **lst, t_stack *new);
-/** Trouve l'index d'un nombre dans la pile en avant et en arriere **/
-int		ft_find_nb_list_index(t_stack *stack, t_data *info, int nb, char c);
-/** Vérifie si un nombre est présent dans un tableau **/
-int		ft_verif(int nb, int *lis_tab, int sizelis);
 /* Affiche la Pile et des informations visuel pour le projet */
 void	benchtest(int onoff, t_data *stack);
 /* Augmente ou Diminue le Compteur de la pile A ou de la pile B */
 void	ft_increase_decrease_counter(t_data *stack, char c);
-/* Trouve le plus petit chiffre dans un tableau donner en parametre */
-int		ft_findsmalltab(int *tab);
-/* Trouve la plus longue suite croissante de la pile A */
-void	ft_init_lis(t_data *stack);
-/* Push le plus petit nombre de la pile A vers la pile B */
-void	ft_pushmin(t_data *stack);
-/* Trouve le plus grand nombre de la pile A du chiffre donner d'un noeud */
-long	ft_nb_superior_bound(t_stack *node, t_data *stack);
-/* Calcul les mouvement d'un noeud dans B pour la ranger dans la pile A */
-void	ft_countdatamove(t_data *stack, int *tab);
-/* Si le meilleur mouvement a appliquer est RR ou RRR */
-void	ft_best_is_rr_or_rrr(t_data *stack, int choice, int i, int j);
-/* Si le meilleur mouvement a appliquer est RA ou RB | RRA ou RRB */
-void	ft_best_is_ra_or_rb(t_data *stack);
-void	ft_best_is_rra_or_rrb(t_data *stack);
-/* Applique un algorithme de tri pour 3 chiffres */
-void	ft_three_nb_algo(t_data *stack, int i);
+/* Fonction qui lis sur l'entree standart */
+void	ft_readline(char **line, t_data *stack);
+/* Parsing des entree donner sur l'entree standart */
+void	ft_sort_entry(char *line, t_data *stack);
 #endif
