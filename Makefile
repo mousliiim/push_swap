@@ -6,8 +6,8 @@ LIBFT			=	includes/libft/libft.a
 
 PRINTF			=	includes/ft_printf/libftprintf.a
 
-GNL				=	bonus/includes/get_next_line/get_next_line.c \
-					bonus/includes/get_next_line/get_next_line_utils.c \
+GNL				=	bonus/includes_bonus/get_next_line_bonus/get_next_line_bonus.c \
+					bonus/includes_bonus/get_next_line_bonus/get_next_line_utils_bonus.c \
 
 SRCS			=	main.c misc/parsing.c misc/movement.c misc/movement_utils.c \
 					misc/utils.c misc/utils_second.c misc/sort_algo.c misc/algo_lis.c \

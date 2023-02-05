@@ -6,7 +6,7 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 06:42:24 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/02/04 07:35:49 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/02/05 19:48:41 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	ft_fill_stack_a(int argc, char **argv, t_data *stack, char **temp)
 	{
 		temp = ft_split(argv[i], ' ');
 		j = -1;
+		if (!*temp)
+			ft_free_error(stack, temp);
 		while (temp[++j])
 		{
 			if (!ft_parsing(temp[j]))

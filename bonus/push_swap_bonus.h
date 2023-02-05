@@ -6,7 +6,7 @@
 /*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 21:23:12 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/02/05 06:20:48 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/02/05 06:50:58 by mmourdal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <fcntl.h>
 # include "../includes/libft/libft.h"
 # include "../includes/ft_printf/ft_printf.h"
-# include "includes/get_next_line/get_next_line.h"
+# include "includes_bonus/get_next_line_bonus/get_next_line_bonus.h"
 # define GREEN "\033[0;32m"
 # define RED "\033[5;31m"
 # define END "\033[0m"
